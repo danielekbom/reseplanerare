@@ -12,5 +12,5 @@ struct edgedata{
 };
 
 void testFunction(){
-  puts("testt");
+  puts("test");
 }
