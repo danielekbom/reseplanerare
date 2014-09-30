@@ -2,7 +2,7 @@
 
 struct node{
   char* nodeName;
-  struct edgedata;
+  struct edgedata[];
 };
 
 struct edgedata{
@@ -12,5 +12,5 @@ struct edgedata{
 };
 
 void testFunction(){
-  puts("test");
+  puts("testt");
 }
