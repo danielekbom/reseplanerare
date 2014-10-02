@@ -7,5 +7,7 @@ struct node;
 struct edgedata;
 
 void testFunction();
+struct graph* createGraphFromFile();
+void printFile();
 
 #endif

@@ -1,8 +1,12 @@
 #include "graphlib.h"
 
+struct graph{
+  struct node* nodes[1024];
+};
+
 struct node{
   char* nodeName;
-  struct edgedata;
+  struct edgedata* edges[20];
 };
 
 struct edgedata{
@@ -13,4 +17,24 @@ struct edgedata{
 
 void testFunction(){
   puts("TEST");
+}
+
+struct graph* createGraphFromFile(){
+  FILE* file = fopen("data/nätverk.txt", "r");
+  
+
+  return NULL;
+}
+
+void printFile(){
+  FILE* fileToRead;
+  fileToRead = fopen("data/nätverk.txt", "r");
+
+  char str[100];
+
+  while(fgets(str, 100, fileToRead) != NULL){
+    puts(str);
+  }
+  fclose(fileToRead);
+
 }
