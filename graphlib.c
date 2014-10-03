@@ -49,4 +49,3 @@ void printFile(){
   }
   fclose(fileToRead);
 }
-
