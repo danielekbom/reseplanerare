@@ -5,7 +5,7 @@ struct graph{
 };
 
 struct node{
-  char* nodeName;
+  char nodeName[];
   int edgesCount;
   struct edge* edges[20];
 };
@@ -22,7 +22,7 @@ void testFunction(){
 
 struct graph* createGraphFromFile(){
   FILE* file = fopen("data/nätverk.txt", "r");
-
+  
   fclose(file);
   return NULL;
 }
