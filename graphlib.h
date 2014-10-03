@@ -9,10 +9,9 @@ struct node;
 struct edge;
 
 void testFunction();
-struct graph* createGraphFromFile();
 struct graph* createGraph();
 struct node* createNode(char nodeName[]);
 struct edge* createEdge(struct node* endNode, unsigned int time, unsigned short busLine);
-void printFile();
+void connectEdge(struct node* startNode, struct edge* edgeToConnect);
 
 #endif

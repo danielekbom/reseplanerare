@@ -45,6 +45,10 @@ struct edge* createEdge(struct node* endNode, unsigned int time, unsigned short 
   return newEdge;
 }
 
+void connectEdge(struct node* startNode, struct edge* edgeToConnect){
+
+}
+
 struct graph* createGraphFromFile(){
   FILE* file = fopen("data/nätverk.txt", "r");
   
