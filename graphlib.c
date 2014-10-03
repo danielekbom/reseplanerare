@@ -5,7 +5,7 @@ struct graph{
 };
 
 struct node{
-  char nodeName[];
+  char* nodeName;
   int edgesCount;
   struct edge* edges[20];
 };
@@ -17,7 +17,9 @@ struct edge{
 };
 
 void testFunction(){
-  puts("test");
+  struct node* testNode = malloc(sizeof(struct node*));
+  testNode = createNode("Gränby");
+  printf("%s\n", testNode->nodeName);
 }
 
 struct graph* createGraphFromFile(){
@@ -32,7 +34,7 @@ struct graph* createGraph(){
   return newGraph;
 }
 
-struct node* createNode(char* nodeName){
+struct node* createNode(char nodeName[]){
   struct node* newNode = malloc(sizeof(struct node));
   newNode->nodeName = nodeName;
   return newNode;

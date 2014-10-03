@@ -11,7 +11,7 @@ struct edge;
 void testFunction();
 struct graph* createGraphFromFile();
 struct graph* createGraph();
-struct node* createNode();
+struct node* createNode(char nodeName[]);
 void printFile();
 
 #endif
