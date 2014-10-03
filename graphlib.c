@@ -6,10 +6,11 @@ struct graph{
 
 struct node{
   char* nodeName;
-  struct edgedata* edges[20];
+  int edgesCount;
+  struct edge* edges[20];
 };
 
-struct edgedata{
+struct edge{
   struct node end;
   unsigned short travel_time;
   unsigned short bus_line;
@@ -22,9 +23,22 @@ void testFunction(){
 struct graph* createGraphFromFile(){
   FILE* file = fopen("data/nätverk.txt", "r");
   
-
+  fclose(file);
   return NULL;
 }
+
+
+struct graph* createGraph(){
+  struct graph* newGraph = malloc(sizeof(struct graph));
+  return newGraph;
+}
+
+struct node* createNode(){
+  
+  return NULL;
+}
+
+
 
 void printFile(){
   FILE* fileToRead;
