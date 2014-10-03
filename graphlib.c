@@ -17,7 +17,7 @@ struct edge{
 };
 
 void testFunction(){
-  puts("TEST");
+  puts("test");
 }
 
 struct graph* createGraphFromFile(){
@@ -26,7 +26,6 @@ struct graph* createGraphFromFile(){
   fclose(file);
   return NULL;
 }
-
 
 struct graph* createGraph(){
   struct graph* newGraph = malloc(sizeof(struct graph));
@@ -39,8 +38,6 @@ struct node* createNode(char* nodeName){
   return newNode;
 }
 
-
-
 void printFile(){
   FILE* fileToRead;
   fileToRead = fopen("data/nätverk.txt", "r");
@@ -51,5 +48,5 @@ void printFile(){
     puts(str);
   }
   fclose(fileToRead);
-
 }
+
