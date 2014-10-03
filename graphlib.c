@@ -22,7 +22,7 @@ void testFunction(){
 
 struct graph* createGraphFromFile(){
   FILE* file = fopen("data/nätverk.txt", "r");
-  
+
   fclose(file);
   return NULL;
 }
@@ -33,9 +33,10 @@ struct graph* createGraph(){
   return newGraph;
 }
 
-struct node* createNode(){
-  
-  return NULL;
+struct node* createNode(char* nodeName){
+  struct node* newNode = malloc(sizeof(struct node));
+  newNode->nodeName = nodeName;
+  return newNode;
 }
 
 

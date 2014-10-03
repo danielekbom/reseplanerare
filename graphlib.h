@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #ifndef _GRAPHLIB_H
 #define _GRAPHLIB_H
