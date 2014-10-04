@@ -37,9 +37,6 @@ void testFunction(){
   printf("%s\n", testGraph->nodes[6]->nodeName);
 }
 
-
-
-
 //Creates a mew empty graph and returns a pointer to it
 Graph createGraph(){
   Graph newGraph = calloc(sizeof(graph), 1);
@@ -80,6 +77,7 @@ void connectEdge(Node startNode, Edge edgeToConnect){
   startNode->edges[index] = edgeToConnect;
 }
 
+//Unique data are fetched from file, converted to nodes, and then added to the graph parameter
 void collectNodesFromFile(Graph nodeGraph){
   FILE* nodesFile = fopen("data/start.txt", "r");
   char* line = malloc(128);
@@ -100,27 +98,4 @@ void collectNodesFromFile(Graph nodeGraph){
     strcpy(tmpToken, token);
   }
   fclose(nodesFile);
-}
-
-
-
-
-
-Graph createGraphFromFile(){
-  FILE* file = fopen("data/nätverk.txt", "r");
-  
-  fclose(file);
-  return NULL;
-}
-
-void printFile(){
-  FILE* fileToRead;
-  fileToRead = fopen("data/nätverk.txt", "r");
-
-  char str[100];
-
-  while(fgets(str, 100, fileToRead) != NULL){
-    puts(str);
-  }
-  fclose(fileToRead);
 }
