@@ -29,12 +29,12 @@ void testFunction(){
   Node testNodeFrom = malloc(sizeof(node));
   testNodeFrom = createNode("Pollacks");
 
-  connectEdge(testNodeFrom, testEdge);
-  printf("%s\t%d\t%s\n", testNodeFrom->nodeName, testNodeFrom->edges[0]->busLine, testNodeFrom->edges[0]->endNode->nodeName); 
+  //connectEdge(testNodeFrom, testEdge);
+  //printf("%s\t%u\t%s\n", testNodeFrom->nodeName, testNodeFrom->edges[0]->busLine, testNodeFrom->edges[0]->endNode->nodeName); 
 
   Graph testGraph = createGraph();
   collectNodesFromFile(testGraph);
-  printf("%s\n", testGraph->nodes[2]->nodeName);
+  printf("%s\n", testGraph->nodes[6]->nodeName);
 }
 
 
@@ -42,7 +42,7 @@ void testFunction(){
 
 //Creates a mew empty graph and returns a pointer to it
 Graph createGraph(){
-  Graph newGraph = malloc(sizeof(graph));
+  Graph newGraph = calloc(sizeof(graph), 1);
   return newGraph;
 }
 
@@ -85,15 +85,17 @@ void collectNodesFromFile(Graph nodeGraph){
   char* line = malloc(128);
   char* token = malloc(128);
   char* tmpToken = malloc(128);
+  char* nodeName = malloc(128);
   Node newNode;
   while(fgets(line, 128, nodesFile) != NULL){
     token = strtok(line, ",");
     token = strtok(NULL, ",");
-    //if(token[0] == ' ') token++;
+    if(token[0] == ' ') token++;
     if(strcmp(tmpToken, token)){
-      printf("%s\n", token);
-      newNode = createNode(token);
+      strcpy(nodeName, token);
+      newNode = createNode(nodeName);
       addNodeToGraph(nodeGraph, newNode);
+      nodeName = malloc(128);
     }
     strcpy(tmpToken, token);
   }
