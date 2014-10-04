@@ -25,6 +25,12 @@ void testFunction(){
   Edge testEdge = malloc(sizeof(edge));
   testEdge = createEdge(testNode, 10, 53);
   printf("%s\t%d\t%d\n", testEdge->endNode->nodeName, testEdge->time, testEdge->busLine);
+
+  Node testNodeFrom = malloc(sizeof(node));
+  testNodeFrom = createNode("Pollacks");
+
+  connectEdge(testNodeFrom, testEdge);
+  printf("%s\t%d\t%s\n", testNodeFrom->nodeName, testNodeFrom->edges[0]->busLine, testNodeFrom->edges[0]->endNode->nodeName); 
 }
 
 
