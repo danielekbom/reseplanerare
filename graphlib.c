@@ -26,7 +26,7 @@ void testFunction(){
 
   Graph testGraph = createGraph();
   collectNodesFromFile(testGraph);
-  printf("%s\n", testGraph->nodes[6]->nodeName);
+  printf("%s\n", testGraph->nodes[5]->nodeName);
 
   destroyGraph(testGraph);
 
@@ -79,7 +79,7 @@ void collectNodesFromFile(Graph nodeGraph){
   FILE* nodesFile = fopen("data/start.txt", "r");
   char* line = malloc(128);
   char* token;
-  char* tmpToken = malloc(128);
+  char* tmpToken = calloc(128, 1);
   char* nodeName;
   Node newNode;
   while(fgets(line, 128, nodesFile) != NULL){
@@ -96,7 +96,6 @@ void collectNodesFromFile(Graph nodeGraph){
   }
   free(line);
   free(tmpToken);
-  free(nodeName);
   fclose(nodesFile);
 }
 
