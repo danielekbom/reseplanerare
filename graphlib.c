@@ -18,23 +18,20 @@ struct edge{
 
 //Temporary function used for testing during development
 void testFunction(){
-  Node testNode = malloc(sizeof(node));
-  testNode = createNode("Gränby");
+  Node testNode = createNode("Gränby");
   printf("%s\n", testNode->nodeName);
 
-  Edge testEdge = malloc(sizeof(edge));
-  testEdge = createEdge(testNode, 10, 53);
+  Edge testEdge = createEdge(testNode, 10, 53);
   printf("%s\t%d\t%d\n", testEdge->endNode->nodeName, testEdge->time, testEdge->busLine);
-
-  Node testNodeFrom = malloc(sizeof(node));
-  testNodeFrom = createNode("Pollacks");
-
-  //connectEdge(testNodeFrom, testEdge);
-  //printf("%s\t%u\t%s\n", testNodeFrom->nodeName, testNodeFrom->edges[0]->busLine, testNodeFrom->edges[0]->endNode->nodeName); 
 
   Graph testGraph = createGraph();
   collectNodesFromFile(testGraph);
   printf("%s\n", testGraph->nodes[6]->nodeName);
+
+  destroyGraph(testGraph);
+
+  free(testNode);
+  free(testEdge);
 }
 
 //Creates a mew empty graph and returns a pointer to it
@@ -81,21 +78,40 @@ void connectEdge(Node startNode, Edge edgeToConnect){
 void collectNodesFromFile(Graph nodeGraph){
   FILE* nodesFile = fopen("data/start.txt", "r");
   char* line = malloc(128);
-  char* token = malloc(128);
+  char* token;
   char* tmpToken = malloc(128);
-  char* nodeName = malloc(128);
+  char* nodeName;
   Node newNode;
   while(fgets(line, 128, nodesFile) != NULL){
     token = strtok(line, ",");
     token = strtok(NULL, ",");
     if(token[0] == ' ') token++;
     if(strcmp(tmpToken, token)){
+      nodeName = malloc(128);
       strcpy(nodeName, token);
       newNode = createNode(nodeName);
       addNodeToGraph(nodeGraph, newNode);
-      nodeName = malloc(128);
     }
     strcpy(tmpToken, token);
   }
+  free(line);
+  free(tmpToken);
+  free(nodeName);
   fclose(nodesFile);
+}
+
+void destroyGraph(Graph graphToDestroy){
+  int nodeIndex = 0;
+  int edgeIndex = 0;
+  while(graphToDestroy->nodes[nodeIndex] != NULL){
+    free(graphToDestroy->nodes[nodeIndex]->nodeName);
+    while(graphToDestroy->nodes[nodeIndex]->edges[edgeIndex] != NULL){
+      free(graphToDestroy->nodes[nodeIndex]->edges[edgeIndex]);
+      ++edgeIndex;
+    }
+    free(graphToDestroy->nodes[nodeIndex]);
+    edgeIndex = 0;
+    ++nodeIndex;
+  }
+  free(graphToDestroy);
 }

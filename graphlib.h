@@ -24,4 +24,6 @@ void connectEdge(Node startNode, Edge edgeToConnect);
 
 void collectNodesFromFile(Graph nodeGraph);
 
+void destroyGraph(Graph graphToDestroy);
+
 #endif
