@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #ifndef _GRAPHLIB_H
 #define _GRAPHLIB_H
@@ -16,8 +17,11 @@ typedef edge* Edge;
 
 void testFunction();
 Graph createGraph();
-Node createNode(char nodeName[]);
+void addNodeToGraph(Graph targetGraph, Node nodeToAdd);
+Node createNode(char* nodeName);
 Edge createEdge(Node endNode, unsigned int time, unsigned short busLine);
 void connectEdge(Node startNode, Edge edgeToConnect);
+
+void collectNodesFromFile(Graph nodeGraph);
 
 #endif

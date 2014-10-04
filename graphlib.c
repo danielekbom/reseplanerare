@@ -31,6 +31,10 @@ void testFunction(){
 
   connectEdge(testNodeFrom, testEdge);
   printf("%s\t%d\t%s\n", testNodeFrom->nodeName, testNodeFrom->edges[0]->busLine, testNodeFrom->edges[0]->endNode->nodeName); 
+
+  Graph testGraph = createGraph();
+  collectNodesFromFile(testGraph);
+  printf("%s\n", testGraph->nodes[2]->nodeName);
 }
 
 
@@ -42,8 +46,17 @@ Graph createGraph(){
   return newGraph;
 }
 
+//Adds the given node to the given graph
+void addNodeToGraph(Graph targetGraph, Node nodeToAdd){
+  int index = 0;
+  while(targetGraph->nodes[index] != NULL){
+    ++index;
+  }
+  targetGraph->nodes[index] = nodeToAdd;
+}
+
 //Creates a new empty node with name nodeName and returns a pointer to it
-Node createNode(char nodeName[]){
+Node createNode(char* nodeName){
   Node newNode = malloc(sizeof(node));
   newNode->nodeName = nodeName;
   return newNode;
@@ -67,7 +80,25 @@ void connectEdge(Node startNode, Edge edgeToConnect){
   startNode->edges[index] = edgeToConnect;
 }
 
-
+void collectNodesFromFile(Graph nodeGraph){
+  FILE* nodesFile = fopen("data/start.txt", "r");
+  char* line = malloc(128);
+  char* token = malloc(128);
+  char* tmpToken = malloc(128);
+  Node newNode;
+  while(fgets(line, 128, nodesFile) != NULL){
+    token = strtok(line, ",");
+    token = strtok(NULL, ",");
+    //if(token[0] == ' ') token++;
+    if(strcmp(tmpToken, token)){
+      printf("%s\n", token);
+      newNode = createNode(token);
+      addNodeToGraph(nodeGraph, newNode);
+    }
+    strcpy(tmpToken, token);
+  }
+  fclose(nodesFile);
+}
 
 
 
