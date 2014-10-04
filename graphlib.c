@@ -1,55 +1,65 @@
 #include "graphlib.h"
 
 struct graph{
-  struct node* nodes[1024];
+  Node nodes[1024];
 };
 
 struct node{
   char* nodeName;
   int edgesCount;
-  struct edge* edges[20];
+  Edge edges[20];
 };
 
 struct edge{
-  struct node* endNode;
-  unsigned short time;
-  unsigned short busLine;
+  Node endNode;
+  Ushort time;
+  Ushort busLine;
 };
 
 void testFunction(){
-  struct node* testNode = malloc(sizeof(struct node));
+  Node testNode = malloc(sizeof(node));
   testNode = createNode("Gränby");
   printf("%s\n", testNode->nodeName);
 
-  struct edge* testEdge = malloc(sizeof(struct edge));
+  Edge testEdge = malloc(sizeof(edge));
   testEdge = createEdge(testNode, 10, 53);
   printf("%s\t%d\t%d\n", testEdge->endNode->nodeName, testEdge->time, testEdge->busLine);
 }
 
-struct graph* createGraph(){
-  struct graph* newGraph = malloc(sizeof(struct graph));
+
+
+
+
+Graph createGraph(){
+  Graph newGraph = malloc(sizeof(graph));
   return newGraph;
 }
 
-struct node* createNode(char nodeName[]){
-  struct node* newNode = malloc(sizeof(struct node));
+Node createNode(char nodeName[]){
+  Node newNode = malloc(sizeof(node));
   newNode->nodeName = nodeName;
   return newNode;
 }
 
-struct edge* createEdge(struct node* endNode, unsigned int time, unsigned short busLine){
-  struct edge* newEdge = malloc(sizeof(struct edge));
+Edge createEdge(Node endNode, Uint time, Ushort busLine){
+  Edge newEdge = malloc(sizeof(edge));
   newEdge->endNode = endNode;
   newEdge->time = time;
   newEdge->busLine = busLine;
   return newEdge;
 }
 
-void connectEdge(struct node* startNode, struct edge* edgeToConnect){
+void connectEdge(Node startNode, Edge edgeToConnect){
 
 }
 
-struct graph* createGraphFromFile(){
+
+
+
+
+
+
+Graph createGraphFromFile(){
   FILE* file = fopen("data/nätverk.txt", "r");
   
   fclose(file);

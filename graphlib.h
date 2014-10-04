@@ -4,14 +4,20 @@
 #ifndef _GRAPHLIB_H
 #define _GRAPHLIB_H
 
-struct graph;
-struct node;
-struct edge;
+typedef unsigned int Uint;
+typedef unsigned short Ushort;
+
+typedef struct graph graph;
+typedef struct node node;
+typedef struct edge edge;
+typedef graph* Graph;
+typedef node* Node;
+typedef edge* Edge;
 
 void testFunction();
-struct graph* createGraph();
-struct node* createNode(char nodeName[]);
-struct edge* createEdge(struct node* endNode, unsigned int time, unsigned short busLine);
-void connectEdge(struct node* startNode, struct edge* edgeToConnect);
+Graph createGraph();
+Node createNode(char nodeName[]);
+Edge createEdge(Node endNode, unsigned int time, unsigned short busLine);
+void connectEdge(Node startNode, Edge edgeToConnect);
 
 #endif
