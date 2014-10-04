@@ -16,6 +16,7 @@ struct edge{
   Ushort busLine;
 };
 
+//Temporary function used for testing during development
 void testFunction(){
   Node testNode = malloc(sizeof(node));
   testNode = createNode("Gränby");
@@ -29,18 +30,20 @@ void testFunction(){
 
 
 
-
+//Creates a mew empty graph and returns a pointer to it
 Graph createGraph(){
   Graph newGraph = malloc(sizeof(graph));
   return newGraph;
 }
 
+//Creates a new empty node with name nodeName and returns a pointer to it
 Node createNode(char nodeName[]){
   Node newNode = malloc(sizeof(node));
   newNode->nodeName = nodeName;
   return newNode;
 }
 
+//Creates a new edge with the data from the incomming parameters and returns a pointer to it
 Edge createEdge(Node endNode, Uint time, Ushort busLine){
   Edge newEdge = malloc(sizeof(edge));
   newEdge->endNode = endNode;
@@ -49,8 +52,13 @@ Edge createEdge(Node endNode, Uint time, Ushort busLine){
   return newEdge;
 }
 
+//Connects an edge to a node, - the node will hence be the startnode
 void connectEdge(Node startNode, Edge edgeToConnect){
-
+  int index = 0;
+  while(startNode->edges[index] != NULL){
+    ++index;
+  }
+  startNode->edges[index] = edgeToConnect;
 }
 
 
