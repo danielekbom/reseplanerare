@@ -7,12 +7,18 @@ struct graph{
 struct node{
   char* nodeName;
   int edgesCount;
+  Departure departures[512];
   Edge edges[20];
+};
+
+struct departure{
+  Ushort clockTime;
+  Ushort busLine;
 };
 
 struct edge{
   Node endNode;
-  Ushort time;
+  Ushort travelTime;
   Ushort busLine;
 };
 
@@ -22,7 +28,7 @@ void testFunction(){
   printf("%s\n", testNode->nodeName);
 
   Edge testEdge = createEdge(testNode, 10, 53);
-  printf("%s\t%d\t%d\n", testEdge->endNode->nodeName, testEdge->time, testEdge->busLine);
+  printf("%s\t%d\t%d\n", testEdge->endNode->nodeName, testEdge->travelTime, testEdge->busLine);
 
   Graph testGraph = createGraph();
   collectNodesFromFile(testGraph);
@@ -56,11 +62,28 @@ Node createNode(char* nodeName){
   return newNode;
 }
 
-//Creates a new edge with the data from the incomming parameters and returns a pointer to it
-Edge createEdge(Node endNode, Uint time, Ushort busLine){
+//Creates a new departure with the data from the parameters and returns a pointer to it
+Departure createDeparture(Ushort clockTime, Ushort busLine){
+  Departure newDeparture = malloc(sizeof(department));
+  newDeparture->clockTime = clockTime;
+  newDeparture->busLine = busLine;
+  return newDeparture;
+}
+
+//Connects a departure to a node
+void connectDeparture(Node nodeToExpand, Departure departureToConnect){
+  int index = 0;
+  while(nodeToExpand->departures[index] != NULL){
+    ++index;
+  }
+  nodeToExpand->departures[index] = departureToConnect;
+}
+
+//Creates a new edge with the data from the parameters and returns a pointer to it
+Edge createEdge(Node endNode, Uint travelTime, Ushort busLine){
   Edge newEdge = malloc(sizeof(edge));
   newEdge->endNode = endNode;
-  newEdge->time = time;
+  newEdge->travelTime = travelTime;
   newEdge->busLine = busLine;
   return newEdge;
 }
@@ -99,6 +122,7 @@ void collectNodesFromFile(Graph nodeGraph){
   fclose(nodesFile);
 }
 
+//Function to free mallocated memory by a graph
 void destroyGraph(Graph graphToDestroy){
   int nodeIndex = 0;
   int edgeIndex = 0;
