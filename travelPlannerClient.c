@@ -9,6 +9,16 @@ void mainMenu(){
   while(choice != 9){
     printMainMenu();
     choice = handleMainMenuInput();
+
+    if(choice != 9){
+      puts("\nKlicka på retur för att komma till huvudmenyn");
+    } else {
+      puts("\nProgrammet avslutas, klicka på retur");
+    }
+
+    fflush(stdout);
+    fflush(stdin);
+    getchar();
   }
 }
 
@@ -25,12 +35,15 @@ void printMainMenu(){
   puts("9. Avsluta");
   puts("-------------------------------------------");
   puts("Vad vill du göra?");
-  puts("\n");
 }
 
 int handleMainMenuInput(){
   int choice = 0;
+  fflush(stdout);
   scanf("%d", &choice);
+  puts("\n*******************************************");
+  puts("***************** Output ******************");
+  puts("*******************************************");
   switch(choice){
   case 1:
     puts("Ännu inte implementerat");
@@ -48,10 +61,10 @@ int handleMainMenuInput(){
     testFunction();
     break;
   case 9:
-    puts("Programmet avslutas");
     break;
   default:
     puts("Menupunkten finns inte, prova igen");
   }
+  puts("*******************************************");
   return choice;
 }
