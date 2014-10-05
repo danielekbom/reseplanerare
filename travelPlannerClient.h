@@ -2,8 +2,13 @@
 #include <stdlib.h>
 #include "graphlib.h"
 
+#ifndef _TRAVELPLANNERCLIENT_H
+#define _TRAVELPLANNERCLIENT_H
+
 void entryPoint();
 void mainMenu();
 void printMainMenu();
 void printOutPutText();
 int handleMainMenuInput();
+
+#endif

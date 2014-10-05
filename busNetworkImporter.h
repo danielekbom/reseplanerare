@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "graphlib.h"
+
+#ifndef _BUSNETWORKIMPORTER_h
+#define _BUSNETWORKIMPORTER_h
+
+void importNetwork();
+void collectNodesFromFile(Graph nodeGraph);
+Ushort convertClockTimeToInt(char* clockTime);
+
+#endif
