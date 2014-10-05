@@ -5,4 +5,5 @@
 void entryPoint();
 void mainMenu();
 void printMainMenu();
+void printOutPutText();
 int handleMainMenuInput();

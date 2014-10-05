@@ -37,34 +37,44 @@ void printMainMenu(){
   puts("Vad vill du göra?");
 }
 
+void printOutPutText(){
+  puts("\n*******************************************");
+  puts("***************** Output ******************");
+  puts("*******************************************");
+}
+
 int handleMainMenuInput(){
   int choice = 0;
   fflush(stdout);
   scanf("%d", &choice);
-  puts("\n*******************************************");
-  puts("***************** Output ******************");
-  puts("*******************************************");
   switch(choice){
   case 1:
+    printOutPutText();
     puts("Ännu inte implementerat");
     break;
   case 2:
+    printOutPutText();
     puts("Ännu inte implementerat");
     break;
   case 3:
+    printOutPutText();
     puts("Ännu inte implementerat");
     break;
   case 4:
+    printOutPutText();
     puts("Ännu inte implementerat");
     break;
   case 8:
+    printOutPutText();
     testFunction();
     break;
   case 9:
     break;
   default:
+    printOutPutText();
     puts("Menupunkten finns inte, prova igen");
   }
   puts("*******************************************");
   return choice;
 }
+
