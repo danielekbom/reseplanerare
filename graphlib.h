@@ -21,13 +21,14 @@ void testFunction();
 Graph createGraph();
 void addNodeToGraph(Graph targetGraph, Node nodeToAdd);
 Node createNode(char* nodeName);
-Departure createDeparture(Ushort clockTime, Ushort busLine);
+Departure createDeparture(Ushort busLine, Ushort clockTime);
 void connectDeparture(Node nodeToExpand, Departure departureToConnect);
 Edge createEdge(Node endNode, unsigned int time, unsigned short busLine);
 void connectEdge(Node startNode, Edge edgeToConnect);
 
 void collectNodesFromFile(Graph nodeGraph);
 
+Ushort convertClockTimeToInt(char* clockTime);
 void destroyGraph(Graph graphToDestroy);
 
 #endif

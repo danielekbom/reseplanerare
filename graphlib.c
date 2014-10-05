@@ -12,8 +12,8 @@ struct node{
 };
 
 struct departure{
-  Ushort clockTime;
   Ushort busLine;
+  Ushort clockTime;
 };
 
 struct edge{
@@ -33,6 +33,9 @@ void testFunction(){
   Graph testGraph = createGraph();
   collectNodesFromFile(testGraph);
   printf("%s\n", testGraph->nodes[5]->nodeName);
+
+  //Ushort hej = convertClockTimeToInt("13:37");
+  //printf("%u\n", hej);
 
   destroyGraph(testGraph);
 
@@ -63,10 +66,10 @@ Node createNode(char* nodeName){
 }
 
 //Creates a new departure with the data from the parameters and returns a pointer to it
-Departure createDeparture(Ushort clockTime, Ushort busLine){
-  Departure newDeparture = malloc(sizeof(department));
-  newDeparture->clockTime = clockTime;
+Departure createDeparture(Ushort busLine, Ushort clockTime){
+  Departure newDeparture = malloc(sizeof(departure));
   newDeparture->busLine = busLine;
+  newDeparture->clockTime = clockTime;
   return newDeparture;
 }
 
@@ -105,8 +108,13 @@ void collectNodesFromFile(Graph nodeGraph){
   char* tmpToken = calloc(128, 1);
   char* nodeName;
   Node newNode;
+  Ushort busLine;
+  Ushort clockTime;
   while(fgets(line, 128, nodesFile) != NULL){
     token = strtok(line, ",");
+    busLine = (unsigned short)atoi(token);
+    // printf("%u\t", busLine);
+
     token = strtok(NULL, ",");
     if(token[0] == ' ') token++;
     if(strcmp(tmpToken, token)){
@@ -115,11 +123,30 @@ void collectNodesFromFile(Graph nodeGraph){
       newNode = createNode(nodeName);
       addNodeToGraph(nodeGraph, newNode);
     }
+
+    //token = strtok(NULL, "\n");
+    //printf("%s\n", token);
+
     strcpy(tmpToken, token);
   }
   free(line);
   free(tmpToken);
   fclose(nodesFile);
+}
+
+//Converts a string in the format xx:xx to an Ushort xxxx
+Ushort convertClockTimeToInt(char* clockTime){
+  char tmpString[5];
+  int clockTimeIndex = 0;
+  int tmpStringIndex = 0;
+  while(clockTimeIndex<5){
+    if(clockTime[clockTimeIndex] != ':'){
+      tmpString[tmpStringIndex] = clockTime[clockTimeIndex];
+      ++tmpStringIndex;
+    }
+    ++clockTimeIndex;
+  }
+  return (unsigned short)atoi(tmpString);
 }
 
 //Function to free mallocated memory by a graph
