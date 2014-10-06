@@ -44,6 +44,10 @@ void collectNodesFromFile(Graph nodeGraph){
   fclose(nodesFile);
 }
 
+void collectEdgesFromFile(Graph nodeGraph){
+
+}
+
 //Converts a string in the format xx:xx to an Ushort xxxx
 Ushort convertClockTimeToShort(char* clockTime){
   char tmpString[5];

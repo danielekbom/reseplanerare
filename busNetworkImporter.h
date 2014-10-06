@@ -8,6 +8,7 @@
 
 Graph importNetwork();
 void collectNodesFromFile(Graph nodeGraph);
+void collectEdgesFromFile(Graph nodeGraph);
 Ushort convertClockTimeToShort(char* clockTime);
 
 #endif
