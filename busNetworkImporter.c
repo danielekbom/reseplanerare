@@ -10,6 +10,7 @@ void importNetwork(){
 //Unique data are fetched from file, converted to nodes, and then added to the graph parameter
 void collectNodesFromFile(Graph nodeGraph){
   FILE* nodesFile = fopen("data/start.txt", "r");
+
   char* line = malloc(128);
   char* token;
   char* tmpToken = calloc(128, 1);
@@ -31,10 +32,10 @@ void collectNodesFromFile(Graph nodeGraph){
       addNodeToGraph(nodeGraph, newNode);
     }
 
-    //token = strtok(NULL, "\n");
-    //printf("%s\n", token);
-
     strcpy(tmpToken, token);
+
+    token = strtok(NULL, "\n");
+    printf("%s\n", token);
   }
   free(line);
   free(tmpToken);

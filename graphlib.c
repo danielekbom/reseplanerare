@@ -1,7 +1,7 @@
 #include "graphlib.h"
 
 struct graph{
-  Node nodes[1024];
+  Node nodes[2048];
 };
 
 struct node{
@@ -32,7 +32,7 @@ void testFunction(){
 
   Graph testGraph = createGraph();
   collectNodesFromFile(testGraph);
-  printf("%s\n", testGraph->nodes[5]->nodeName);
+  // printf("%s\n", testGraph->nodes[5]->nodeName);
 
   //Ushort hej = convertClockTimeToInt("13:37");
   //printf("%u\n", hej);
@@ -102,6 +102,7 @@ void connectEdge(Node startNode, Edge edgeToConnect){
 
 //Function to free mallocated memory by a graph
 void destroyGraph(Graph graphToDestroy){
+  assert(graphToDestroy != NULL);
   int nodeIndex = 0;
   int edgeIndex = 0;
   while(graphToDestroy->nodes[nodeIndex] != NULL){

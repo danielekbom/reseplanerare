@@ -1,7 +1,8 @@
 #include "travelPlannerClient.h"
 
 void entryPoint(){
-  mainMenu();
+  //mainMenu();
+  testFunction();
 }
 
 void mainMenu(){
