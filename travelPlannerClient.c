@@ -5,7 +5,7 @@ void entryPoint(){
   testFunction();
   
   Graph uppsalaNetwork = importNetwork();
-  printf("%u\n", getDepartureTime(uppsalaNetwork, 1, 2));
+  printf("%u\t%u\n", getDepartureBusLine(uppsalaNetwork, 2, 3), getDepartureTime(uppsalaNetwork, 2, 3));
   destroyGraph(uppsalaNetwork);
 }
 

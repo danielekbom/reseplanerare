@@ -97,6 +97,10 @@ void connectEdge(Node startNode, Edge edgeToConnect){
   startNode->edges[index] = edgeToConnect;
 }
 
+Ushort getDepartureBusLine(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex){
+  return srcGraph->nodes[nodeIndex]->departures[departureIndex]->busLine;
+}
+
 Ushort getDepartureTime(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex){
   return srcGraph->nodes[nodeIndex]->departures[departureIndex]->departureTime;
 }
