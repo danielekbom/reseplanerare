@@ -97,6 +97,12 @@ void connectEdge(Node startNode, Edge edgeToConnect){
   startNode->edges[index] = edgeToConnect;
 }
 
+char* getNodeNameFromGraph(Graph srcGraph, Ushort nodeIndex){
+  char* nodeName = malloc(sizeof(srcGraph->nodes[nodeIndex]->nodeName));
+  strcpy(nodeName, srcGraph->nodes[nodeIndex]->nodeName);
+  return nodeName;
+}
+
 Ushort getDepartureBusLine(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex){
   return srcGraph->nodes[nodeIndex]->departures[departureIndex]->busLine;
 }
