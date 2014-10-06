@@ -13,7 +13,7 @@ struct node{
 
 struct departure{
   Ushort busLine;
-  Ushort clockTime;
+  Ushort departureTime;
 };
 
 struct edge{
@@ -33,9 +33,6 @@ void testFunction(){
   Graph testGraph = createGraph();
   collectNodesFromFile(testGraph);
   // printf("%s\n", testGraph->nodes[5]->nodeName);
-
-  Ushort hej = convertClockTimeToInt("3:37");
-  printf("%u\n", hej);
 
   destroyGraph(testGraph);
 
@@ -66,10 +63,10 @@ Node createNode(char* nodeName){
 }
 
 //Creates a new departure with the data from the parameters and returns a pointer to it
-Departure createDeparture(Ushort busLine, Ushort clockTime){
+Departure createDeparture(Ushort busLine, Ushort departureTime){
   Departure newDeparture = malloc(sizeof(departure));
   newDeparture->busLine = busLine;
-  newDeparture->clockTime = clockTime;
+  newDeparture->departureTime = departureTime;
   return newDeparture;
 }
 

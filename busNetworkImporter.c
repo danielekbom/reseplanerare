@@ -10,14 +10,14 @@ void importNetwork(){
 //Unique data are fetched from file, converted to nodes, and then added to the graph parameter
 void collectNodesFromFile(Graph nodeGraph){
   FILE* nodesFile = fopen("data/start.txt", "r");
-
   char* line = malloc(128);
   char* token;
   char* tmpToken = calloc(128, 1);
   char* nodeName;
   Node newNode;
   Ushort busLine;
-  Ushort clockTime;
+  Ushort departureTime;
+
   while(fgets(line, 128, nodesFile) != NULL){
     token = strtok(line, ",");
     busLine = (unsigned short)atoi(token);
@@ -34,7 +34,8 @@ void collectNodesFromFile(Graph nodeGraph){
     strcpy(tmpToken, token);
 
     token = strtok(NULL, "\n");
-    printf("%s\n", token);
+    if(token[0] == ' ') token++;
+    departureTime = convertClockTimeToShort(token);
   }
   free(line);
   free(tmpToken);
@@ -42,7 +43,7 @@ void collectNodesFromFile(Graph nodeGraph){
 }
 
 //Converts a string in the format xx:xx to an Ushort xxxx
-Ushort convertClockTimeToInt(char* clockTime){
+Ushort convertClockTimeToShort(char* clockTime){
   char tmpString[5];
   int clockTimeIndex = 0;
   int tmpStringIndex = 0;
