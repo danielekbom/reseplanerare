@@ -34,8 +34,8 @@ void testFunction(){
   collectNodesFromFile(testGraph);
   // printf("%s\n", testGraph->nodes[5]->nodeName);
 
-  //Ushort hej = convertClockTimeToInt("13:37");
-  //printf("%u\n", hej);
+  Ushort hej = convertClockTimeToInt("3:37");
+  printf("%u\n", hej);
 
   destroyGraph(testGraph);
 

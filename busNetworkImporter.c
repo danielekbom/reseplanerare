@@ -21,7 +21,6 @@ void collectNodesFromFile(Graph nodeGraph){
   while(fgets(line, 128, nodesFile) != NULL){
     token = strtok(line, ",");
     busLine = (unsigned short)atoi(token);
-    // printf("%u\t", busLine);
 
     token = strtok(NULL, ",");
     if(token[0] == ' ') token++;
@@ -47,12 +46,13 @@ Ushort convertClockTimeToInt(char* clockTime){
   char tmpString[5];
   int clockTimeIndex = 0;
   int tmpStringIndex = 0;
-  while(clockTimeIndex<5){
+  while(clockTime[clockTimeIndex] != '\0'){
     if(clockTime[clockTimeIndex] != ':'){
       tmpString[tmpStringIndex] = clockTime[clockTimeIndex];
       ++tmpStringIndex;
     }
     ++clockTimeIndex;
   }
+  tmpString[tmpStringIndex] = '\0';
   return (unsigned short)atoi(tmpString);
 }
