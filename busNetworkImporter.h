@@ -6,7 +6,7 @@
 #ifndef _BUSNETWORKIMPORTER_h
 #define _BUSNETWORKIMPORTER_h
 
-void importNetwork();
+Graph importNetwork();
 void collectNodesFromFile(Graph nodeGraph);
 Ushort convertClockTimeToShort(char* clockTime);
 

@@ -3,6 +3,9 @@
 void entryPoint(){
   //mainMenu();
   testFunction();
+  
+  Graph uppsalaNetwork = importNetwork();
+  destroyGraph(uppsalaNetwork);
 }
 
 void mainMenu(){

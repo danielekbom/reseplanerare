@@ -1,10 +1,9 @@
 #include "busNetworkImporter.h"
 
-void importNetwork(){
-  Graph testGraph2 = createGraph();
-  collectNodesFromFile(testGraph2);
-
-  destroyGraph(testGraph2);
+Graph importNetwork(){
+  Graph importedGraph = createGraph();
+  collectNodesFromFile(importedGraph);
+  return importedGraph;
 }
 
 //Unique data are fetched from file, converted to nodes, and then added to the graph parameter

@@ -30,12 +30,6 @@ void testFunction(){
   Edge testEdge = createEdge(testNode, 10, 53);
   printf("%s\t%d\t%d\n", testEdge->endNode->nodeName, testEdge->travelTime, testEdge->busLine);
 
-  Graph testGraph = createGraph();
-  collectNodesFromFile(testGraph);
-  // printf("%s\n", testGraph->nodes[5]->nodeName);
-
-  destroyGraph(testGraph);
-
   free(testNode);
   free(testEdge);
 }
@@ -58,6 +52,9 @@ void addNodeToGraph(Graph targetGraph, Node nodeToAdd){
 //Creates a new empty node with name nodeName and returns a pointer to it
 Node createNode(char* nodeName){
   Node newNode = malloc(sizeof(node));
+  for(int i = 0; i < 20; ++i){
+    newNode->edges[i] = NULL;
+  }
   newNode->nodeName = nodeName;
   return newNode;
 }
