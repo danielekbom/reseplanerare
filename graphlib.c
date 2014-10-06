@@ -7,8 +7,8 @@ struct graph{
 struct node{
   char* nodeName;
   int edgesCount;
-  Departure departures[512];
   Edge edges[20];
+  Departure departures[512];
 };
 
 struct departure{
@@ -55,6 +55,9 @@ Node createNode(char* nodeName){
   for(int i = 0; i < 20; ++i){
     newNode->edges[i] = NULL;
   }
+  for(int i = 0; i < 512; ++i){
+    newNode->departures[i] = NULL;
+  }
   newNode->nodeName = nodeName;
   return newNode;
 }
@@ -94,19 +97,29 @@ void connectEdge(Node startNode, Edge edgeToConnect){
   startNode->edges[index] = edgeToConnect;
 }
 
+Ushort getDepartureTime(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex){
+  return srcGraph->nodes[nodeIndex]->departures[departureIndex]->departureTime;
+}
+
 //Function to free mallocated memory by a graph
 void destroyGraph(Graph graphToDestroy){
   assert(graphToDestroy != NULL);
   int nodeIndex = 0;
   int edgeIndex = 0;
+  int departureIndex = 0;
   while(graphToDestroy->nodes[nodeIndex] != NULL){
     free(graphToDestroy->nodes[nodeIndex]->nodeName);
     while(graphToDestroy->nodes[nodeIndex]->edges[edgeIndex] != NULL){
       free(graphToDestroy->nodes[nodeIndex]->edges[edgeIndex]);
       ++edgeIndex;
     }
+    while(graphToDestroy->nodes[nodeIndex]->departures[departureIndex] != NULL){
+      free(graphToDestroy->nodes[nodeIndex]->departures[departureIndex]);
+      ++departureIndex;
+    }
     free(graphToDestroy->nodes[nodeIndex]);
     edgeIndex = 0;
+    departureIndex = 0;
     ++nodeIndex;
   }
   free(graphToDestroy);

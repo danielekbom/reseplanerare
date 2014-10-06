@@ -27,9 +27,8 @@ void connectDeparture(Node nodeToExpand, Departure departureToConnect);
 Edge createEdge(Node endNode, unsigned int time, unsigned short busLine);
 void connectEdge(Node startNode, Edge edgeToConnect);
 
-void collectNodesFromFile(Graph nodeGraph);
+Ushort getDepartureTime(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex);
 
-Ushort convertClockTimeToInt(char* clockTime);
 void destroyGraph(Graph graphToDestroy);
 
 #endif

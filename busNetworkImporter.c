@@ -16,6 +16,7 @@ void collectNodesFromFile(Graph nodeGraph){
   Node newNode;
   Ushort busLine;
   Ushort departureTime;
+  Departure newDeparture;
 
   while(fgets(line, 128, nodesFile) != NULL){
     token = strtok(line, ",");
@@ -35,6 +36,8 @@ void collectNodesFromFile(Graph nodeGraph){
     token = strtok(NULL, "\n");
     if(token[0] == ' ') token++;
     departureTime = convertClockTimeToShort(token);
+    newDeparture = createDeparture(busLine, departureTime);
+    connectDeparture(newNode, newDeparture);
   }
   free(line);
   free(tmpToken);
