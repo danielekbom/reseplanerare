@@ -22,6 +22,11 @@ struct edge{
   Ushort busLine;
 };
 
+struct pathStep{
+  Node step;
+  struct pathStep* nextPathStep;
+};
+
 //Temporary function used for testing during development
 void testFunction(){
   Node testNode = createNode("Gränby");
@@ -132,6 +137,45 @@ Ushort getDepartureBusLine(Graph srcGraph, Ushort nodeIndex, Ushort departureInd
 
 Ushort getDepartureTime(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex){
   return srcGraph->nodes[nodeIndex]->departures[departureIndex]->departureTime;
+}
+
+void getPossiblePaths(Graph srcGraph, Node fromNode, Node toNode){
+  int edgePatterns[16][32];
+  memset(edgePatterns, 0, sizeof(edgePatterns));
+  Ushort busLine;
+  Ushort prevBusLine;
+  Node nextNode;
+  int index = 0;
+  int innerIndex = 0;
+  int temp = 0;
+  while(fromNode->edges[index] != NULL){
+    prevBusLine = fromNode->edges[index]->busLine;
+    nextNode = fromNode->edges[index]->endNode;
+    edgePatterns[index][temp] = index;
+    if(!strcmp(fromNode->edges[index]->endNode->nodeName, toNode->nodeName)){
+      continue;
+    }
+    while(nextNode->edges[innerIndex] != NULL){
+      temp++;
+      if(!strcmp(nextNode->edges[innerIndex]->endNode->nodeName, toNode->nodeName)){
+	edgePatterns[index][temp] = innerIndex;
+	break;
+      }
+
+      busLine = nextNode->edges[innerIndex]->busLine;
+      if(busLine == prevBusLine){
+	edgePatterns[index][temp] = innerIndex;
+	nextNode = nextNode->edges[innerIndex]->endNode;
+      }
+      innerIndex++;
+    }
+    if(strcmp(nextNode->nodeName, toNode->nodeName)){
+      edgePatterns[index][0] = -1;
+    }
+    innerIndex = 0;
+    temp = 0;
+    index++;
+  }
 }
 
 //Function to free mallocated memory by a graph

@@ -33,6 +33,8 @@ Node getNodeByNameElseAddNode(Graph srcGraph, char* nodeName);
 Ushort getDepartureBusLine(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex);
 Ushort getDepartureTime(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex);
 
+void getPossiblePaths(Graph srcGraph, Node fromNode, Node toNode);
+
 void destroyGraph(Graph graphToDestroy);
 
 #endif

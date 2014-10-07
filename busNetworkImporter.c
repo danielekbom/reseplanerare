@@ -50,12 +50,13 @@ void collectEdgesFromFile(Graph nodeGraph){
   char* line = malloc(128);
   char* token;
   char nodeToExpand[64];
-  char* endNodeName = calloc(64, 1);
+  char* endNodeName;
   Ushort travelTime;
   Ushort busLine;
   Edge newEdge;
 
   while(fgets(line, 128, edgesFile) != NULL){
+    endNodeName = calloc(64, 1);
     token = strtok(line, ",");
     busLine = (Ushort)atoi(token);
 
