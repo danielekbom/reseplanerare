@@ -3,6 +3,7 @@
 Graph importNetwork(){
   Graph importedGraph = createGraph();
   collectNodesFromFile(importedGraph);
+  collectEdgesFromFile(importedGraph);
   return importedGraph;
 }
 
@@ -45,7 +46,20 @@ void collectNodesFromFile(Graph nodeGraph){
 }
 
 void collectEdgesFromFile(Graph nodeGraph){
+  FILE* edgesFile = fopen("data/nätverk.txt", "r");
+  char* line = malloc(128);
+  char* token;
+  char* nodeToExpand;
+  char* endNode;
+  Ushort travelTime;
+  Ushort busLine;
+  Edge newEdge;
 
+  while(fgets(line, 128, edgesFile) != NULL){
+    token = strtok(line, ",");
+    busLine = (unsigned short)atoi(token);
+    printf("%u\n", busLine);
+  }
 }
 
 //Converts a string in the format xx:xx to an Ushort xxxx
