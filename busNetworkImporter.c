@@ -49,16 +49,28 @@ void collectEdgesFromFile(Graph nodeGraph){
   FILE* edgesFile = fopen("data/nätverk.txt", "r");
   char* line = malloc(128);
   char* token;
-  char* nodeToExpand;
-  char* endNode;
+  char nodeToExpand[64];
+  char endNode[64];
   Ushort travelTime;
   Ushort busLine;
   Edge newEdge;
 
   while(fgets(line, 128, edgesFile) != NULL){
     token = strtok(line, ",");
-    busLine = (unsigned short)atoi(token);
-    printf("%u\n", busLine);
+    busLine = (Ushort)atoi(token);
+
+    token = strtok(NULL, ",");
+    if(token[0] == ' ') token++;
+    strcpy(nodeToExpand, token);
+
+    token = strtok(NULL, ",");
+    if(token[0] == ' ') token++;
+    strcpy(endNode, token);
+
+    token = strtok(NULL, ",");
+    if(token[0] == ' ') token++;
+    travelTime = (Ushort)atoi(token);
+    printf("%u\n", travelTime);
   }
 }
 
