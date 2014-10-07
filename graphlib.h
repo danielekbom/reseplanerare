@@ -26,8 +26,10 @@ Departure createDeparture(Ushort busLine, Ushort clockTime);
 void connectDeparture(Node nodeToExpand, Departure departureToConnect);
 Edge createEdge(Node endNode, unsigned int time, unsigned short busLine);
 void connectEdge(Node startNode, Edge edgeToConnect);
+void connectEdgeByNodeName(Graph srcGraph, char* nodeName, Edge edgeToConnect);
 
 char* getNodeNameFromGraph(Graph srcGraph, Ushort nodeIndex);
+Node getNodeByNameElseAddNode(Graph srcGraph, char* nodeName);
 Ushort getDepartureBusLine(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex);
 Ushort getDepartureTime(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex);
 

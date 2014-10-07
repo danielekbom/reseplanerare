@@ -50,7 +50,7 @@ void collectEdgesFromFile(Graph nodeGraph){
   char* line = malloc(128);
   char* token;
   char nodeToExpand[64];
-  char endNode[64];
+  char* endNodeName = calloc(64, 1);
   Ushort travelTime;
   Ushort busLine;
   Edge newEdge;
@@ -65,13 +65,18 @@ void collectEdgesFromFile(Graph nodeGraph){
 
     token = strtok(NULL, ",");
     if(token[0] == ' ') token++;
-    strcpy(endNode, token);
+    strcpy(endNodeName, token);
 
     token = strtok(NULL, ",");
     if(token[0] == ' ') token++;
     travelTime = (Ushort)atoi(token);
     printf("%u\n", travelTime);
+
+    newEdge = createEdge(getNodeByNameElseAddNode(nodeGraph, endNodeName), travelTime, busLine);
+    connectEdgeByNodeName(nodeGraph, nodeToExpand, newEdge);
   }
+  free(line);
+  fclose(edgesFile);
 }
 
 //Converts a string in the format xx:xx to an Ushort xxxx
