@@ -71,7 +71,6 @@ void collectEdgesFromFile(Graph nodeGraph){
     token = strtok(NULL, ",");
     if(token[0] == ' ') token++;
     travelTime = (Ushort)atoi(token);
-    printf("%u\n", travelTime);
 
     newEdge = createEdge(getNodeByNameElseAddNode(nodeGraph, endNodeName), travelTime, busLine);
     connectEdgeByNodeName(nodeGraph, nodeToExpand, newEdge);

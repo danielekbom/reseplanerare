@@ -7,9 +7,8 @@ void entryPoint(){
   testFunction();
   
   uppsalaNetwork = importNetwork();
-  printf("%s\t%u\t%u\n", getNodeNameFromGraph(uppsalaNetwork, 2), getDepartureBusLine(uppsalaNetwork, 2, 3), getDepartureTime(uppsalaNetwork, 2, 3));
 
-  getPossiblePaths(uppsalaNetwork, getNodeByNameElseAddNode(uppsalaNetwork, "Centralstationen"), getNodeByNameElseAddNode(uppsalaNetwork, "Langvagen"));
+  printPossiblePaths(uppsalaNetwork, "Centralstationen", "Langvagen");
 
   destroyGraph(uppsalaNetwork);
 }

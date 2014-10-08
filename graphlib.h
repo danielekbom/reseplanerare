@@ -33,8 +33,9 @@ Node getNodeByNameElseAddNode(Graph srcGraph, char* nodeName);
 Ushort getDepartureBusLine(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex);
 Ushort getDepartureTime(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex);
 
-void getPossiblePaths(Graph srcGraph, Node fromNode, Node toNode);
-void printEdgePatterns(Node fromNode, int edgePatterns[16][32]);
+void printPossiblePaths(Graph srcGraph, char* fromNodeName, char* toNodeName);
+struct array2d* getPossiblePaths(Node fromNode, Node toNode);
+void printEdgePatterns(Node fromNode, struct array2d*  edgePatterns);
 
 void destroyGraph(Graph graphToDestroy);
 
