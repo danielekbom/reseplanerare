@@ -202,7 +202,7 @@ void printEdgePatterns(Node fromNode, Array2d edgePatterns){
   Ushort totalTravelTime = 0;
   while(index < 16){
     if(edgePatterns->array[index][0] != -1){
-      printf("\nMöjlig resväg med busslinje %u:\n", fromNode->edges[index]->busLine);
+      printf("Möjlig resväg med busslinje %u:\n", fromNode->edges[index]->busLine);
       printf("%s", tmpNode->nodeName);
       while(edgePatterns->array[index][innerIndex] != -1){
 	if(tmpNode->edges[edgePatterns->array[index][innerIndex]] != NULL){
@@ -213,7 +213,7 @@ void printEdgePatterns(Node fromNode, Array2d edgePatterns){
 	}
 	innerIndex++;
       }
-      printf("\nTotal restid: %u min", totalTravelTime); 
+      printf("\nTotal restid: %u min\n", totalTravelTime); 
       innerIndex = 0;
       totalTravelTime = 0;
       tmpNode = fromNode;

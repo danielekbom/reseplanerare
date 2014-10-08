@@ -30,7 +30,7 @@ void mainMenu(){
 }
 
 void printMainMenu(){
-  puts("\n\n");
+  puts("");
   puts("-------------------------------------------");
   puts("-------------- Reseplanerare --------------");
   puts("-------------------------------------------");
@@ -49,7 +49,6 @@ void printOutPutText(){
   puts("\n*******************************************");
   puts("***************** Output ******************");
   puts("*******************************************");
-  fflush(stdout);
 }
 
 int handleMainMenuInput(){
@@ -74,8 +73,8 @@ int handleMainMenuInput(){
     puts("Ännu inte implementerat");
     break;
   case 5:
-    printOutPutText();
     printPathXtoY();
+    break;
   case 8:
     printOutPutText();
     testFunction();
@@ -93,11 +92,12 @@ int handleMainMenuInput(){
 void printPathXtoY (){
   char* X = malloc(32);
   char* Y = malloc(32);
-  puts("\nSkriv önskad startstation:");
+  puts("\nAnge önskad startstation:");
   fflush(stdout);
   scanf("%s", X);
-  puts("\nSkriv önskad destination:");
+  puts("\nAnge önskad slutstation:");
   fflush(stdout);
   scanf("%s", Y);
+  printOutPutText();
   printPossiblePaths(uppsalaNetwork, X, Y);
 }
