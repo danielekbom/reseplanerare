@@ -3,12 +3,10 @@
 static Graph uppsalaNetwork;
 
 void entryPoint(){
-  //mainMenu();
-  testFunction();
-  
   uppsalaNetwork = importNetwork();
 
-  printPossiblePaths(uppsalaNetwork, "Centralstationen", "Langvagen");
+  mainMenu();
+  testFunction();
 
   destroyGraph(uppsalaNetwork);
 }
@@ -40,6 +38,7 @@ void printMainMenu(){
   puts("2. Skapa ny busshållsplats");
   puts("3. Skapa ny avgång");
   puts("4. Visa tidtabell för en hållplats");
+  puts("5. Möjliga resavägar från X till Y");
   puts("8. Kör testFunction");
   puts("9. Avsluta");
   puts("-------------------------------------------");
@@ -50,6 +49,7 @@ void printOutPutText(){
   puts("\n*******************************************");
   puts("***************** Output ******************");
   puts("*******************************************");
+  fflush(stdout);
 }
 
 int handleMainMenuInput(){
@@ -73,6 +73,9 @@ int handleMainMenuInput(){
     printOutPutText();
     puts("Ännu inte implementerat");
     break;
+  case 5:
+    printOutPutText();
+    printPathXtoY();
   case 8:
     printOutPutText();
     testFunction();
@@ -87,3 +90,14 @@ int handleMainMenuInput(){
   return choice;
 }
 
+void printPathXtoY (){
+  char* X = malloc(32);
+  char* Y = malloc(32);
+  puts("\nSkriv önskad startstation:");
+  fflush(stdout);
+  scanf("%s", X);
+  puts("\nSkriv önskad destination:");
+  fflush(stdout);
+  scanf("%s", Y);
+  printPossiblePaths(uppsalaNetwork, X, Y);
+}

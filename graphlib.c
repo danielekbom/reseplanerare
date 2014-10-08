@@ -134,13 +134,13 @@ Ushort getDepartureTime(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex)
 void printPossiblePaths(Graph srcGraph, char* fromNodeName, char* toNodeName){
   Node fromNode = getNodeByNameElseAddNode(srcGraph, fromNodeName);
   Node toNode = getNodeByNameElseAddNode(srcGraph, toNodeName);
-  struct array2d* edgePatterns = getPossiblePaths(fromNode, toNode);
+  Array2d edgePatterns = getPossiblePaths(fromNode, toNode);
   printEdgePatterns(fromNode, edgePatterns);
 }
 
-struct array2d* getPossiblePaths(Node fromNode, Node toNode){
-  struct array2d* edgePatterns = malloc(sizeof(struct array2d));
-  memset(edgePatterns->array, -1, sizeof(struct array2d));
+Array2d getPossiblePaths(Node fromNode, Node toNode){
+  Array2d edgePatterns = malloc(sizeof(array2d));
+  memset(edgePatterns->array, -1, sizeof(array2d));
   Ushort busLine;
   Ushort prevBusLine;
   Node nextNode;
@@ -158,24 +158,28 @@ struct array2d* getPossiblePaths(Node fromNode, Node toNode){
       edgePatterns->array[index][0] = -1;
       continue;
     }
+    temp++;
     while(nextNode->edges[innerIndex] != NULL){
-      temp++;
       busLine = nextNode->edges[innerIndex]->busLine;
       if(!strcmp(nextNode->edges[innerIndex]->endNode->nodeName, toNode->nodeName) && busLine == prevBusLine){
 	edgePatterns->array[index][temp] = innerIndex;
 	nextNode = nextNode->edges[innerIndex]->endNode;
 	break;
       }
-
       if(busLine == prevBusLine){
 	edgePatterns->array[index][temp] = innerIndex;
 	nextNode = nextNode->edges[innerIndex]->endNode;
 	innerIndex = 0;
+	temp++;
 	continue;
       }
       if(nextNode->edges[0] == NULL || busLine != prevBusLine){
-	edgePatterns->array[index][0] = -1;
-	break;
+	if(nextNode->edges[0] == NULL){
+	  edgePatterns->array[index][0] = -1;
+	  break;
+	}
+	innerIndex++;
+	continue;
       }
       innerIndex++;
     }
@@ -186,25 +190,32 @@ struct array2d* getPossiblePaths(Node fromNode, Node toNode){
     temp = 0;
     index++;
   }
-  //printEdgePatterns(fromNode, edgePatterns);
+
   return edgePatterns;
 }
 
-void printEdgePatterns(Node fromNode, struct array2d* edgePatterns){
+void printEdgePatterns(Node fromNode, Array2d edgePatterns){
   Node tmpNode = fromNode;
   int index = 0;
   int innerIndex = 0;
+  Ushort time = 0;
+  Ushort totalTravelTime = 0;
   while(index < 16){
     if(edgePatterns->array[index][0] != -1){
+      printf("\nMöjlig resväg med busslinje %u:\n", fromNode->edges[index]->busLine);
       printf("%s", tmpNode->nodeName);
       while(edgePatterns->array[index][innerIndex] != -1){
 	if(tmpNode->edges[edgePatterns->array[index][innerIndex]] != NULL){
+	  time = tmpNode->edges[edgePatterns->array[index][innerIndex]]->travelTime;
 	  tmpNode = tmpNode->edges[edgePatterns->array[index][innerIndex]]->endNode;
-	  printf(" -> %s", tmpNode->nodeName);
+	  printf(" -> Restid: %u min -> %s", time, tmpNode->nodeName);
+	  totalTravelTime += time;
 	}
 	innerIndex++;
       }
+      printf("\nTotal restid: %u min", totalTravelTime); 
       innerIndex = 0;
+      totalTravelTime = 0;
       tmpNode = fromNode;
       puts("");
     }

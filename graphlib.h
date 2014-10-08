@@ -13,10 +13,12 @@ typedef struct graph graph;
 typedef struct node node;
 typedef struct departure departure;
 typedef struct edge edge;
+typedef struct array2d array2d;
 typedef graph* Graph;
 typedef node* Node;
 typedef departure* Departure;
 typedef edge* Edge;
+typedef array2d* Array2d;
 
 void testFunction();
 Graph createGraph();
@@ -34,8 +36,8 @@ Ushort getDepartureBusLine(Graph srcGraph, Ushort nodeIndex, Ushort departureInd
 Ushort getDepartureTime(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex);
 
 void printPossiblePaths(Graph srcGraph, char* fromNodeName, char* toNodeName);
-struct array2d* getPossiblePaths(Node fromNode, Node toNode);
-void printEdgePatterns(Node fromNode, struct array2d*  edgePatterns);
+Array2d getPossiblePaths(Node fromNode, Node toNode);
+void printEdgePatterns(Node fromNode, Array2d  edgePatterns);
 
 void destroyGraph(Graph graphToDestroy);
 
