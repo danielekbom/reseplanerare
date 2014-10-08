@@ -141,7 +141,7 @@ Ushort getDepartureTime(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex)
 
 void getPossiblePaths(Graph srcGraph, Node fromNode, Node toNode){
   int edgePatterns[16][32];
-  memset(edgePatterns, 0, sizeof(edgePatterns));
+  memset(edgePatterns, -1, sizeof(edgePatterns));
   Ushort busLine;
   Ushort prevBusLine;
   Node nextNode;
@@ -155,6 +155,10 @@ void getPossiblePaths(Graph srcGraph, Node fromNode, Node toNode){
     if(!strcmp(fromNode->edges[index]->endNode->nodeName, toNode->nodeName)){
       continue;
     }
+    if(nextNode->edges[innerIndex] == NULL){
+      edgePatterns[index][0] = -1;
+      continue;
+    }
     while(nextNode->edges[innerIndex] != NULL){
       temp++;
       if(!strcmp(nextNode->edges[innerIndex]->endNode->nodeName, toNode->nodeName)){
@@ -166,14 +170,39 @@ void getPossiblePaths(Graph srcGraph, Node fromNode, Node toNode){
       if(busLine == prevBusLine){
 	edgePatterns[index][temp] = innerIndex;
 	nextNode = nextNode->edges[innerIndex]->endNode;
+	innerIndex = 0;
+	continue;
+      }
+      if(nextNode->edges[0] == NULL || nextNode->edges[innerIndex]->busLine != prevBusLine){
+	edgePatterns[index][0] = -1;
+	break;
       }
       innerIndex++;
     }
-    if(strcmp(nextNode->nodeName, toNode->nodeName)){
-      edgePatterns[index][0] = -1;
-    }
     innerIndex = 0;
     temp = 0;
+    index++;
+  }
+  printEdgePatterns(fromNode, edgePatterns);
+}
+
+void printEdgePatterns(Node fromNode, int edgePatterns[16][32]){
+  Node tmpNode = fromNode;
+  int index = 0;
+  int innerIndex = 0;
+  while(index < 16){
+    if(edgePatterns[index][0] != -1){
+      while(edgePatterns[index][innerIndex] != -1){
+	printf("%s -> ", tmpNode->nodeName);
+	if(tmpNode->edges[edgePatterns[index][innerIndex]] != NULL){
+	  tmpNode = tmpNode->edges[edgePatterns[index][innerIndex]]->endNode;
+	}
+	innerIndex++;
+      }
+      innerIndex = 0;
+      tmpNode = fromNode;
+      puts("");
+    }
     index++;
   }
 }

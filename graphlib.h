@@ -34,6 +34,7 @@ Ushort getDepartureBusLine(Graph srcGraph, Ushort nodeIndex, Ushort departureInd
 Ushort getDepartureTime(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex);
 
 void getPossiblePaths(Graph srcGraph, Node fromNode, Node toNode);
+void printEdgePatterns(Node fromNode, int edgePatterns[16][32]);
 
 void destroyGraph(Graph graphToDestroy);
 
