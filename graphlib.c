@@ -223,7 +223,7 @@ void printEdgePatterns(Node fromNode, Array2d edgePatterns){
   }
 }
 
-void printDepartures(Node srcNode){
+void printDeparturesInClockFormat(Node srcNode){
   int departureTime;
   char departureTimeString[6];
   char tmpDepartureTimeString[5];

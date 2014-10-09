@@ -38,7 +38,7 @@ Ushort getDepartureTime(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex)
 void printPossiblePaths(Graph srcGraph, char* fromNodeName, char* toNodeName);
 Array2d getPossiblePaths(Node fromNode, Node toNode);
 void printEdgePatterns(Node fromNode, Array2d  edgePatterns);
-void printDepartures(Node srcNode);
+void printDeparturesInClockFormat(Node srcNode);
 
 void destroyGraph(Graph graphToDestroy);
 

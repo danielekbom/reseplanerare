@@ -37,7 +37,7 @@ void printMainMenu(){
   puts("1. Skapa nytt bussnätverk");
   puts("2. Skapa ny busshållsplats");
   puts("3. Skapa ny avgång");
-  puts("4. Visa tidtabell för en hållplats");
+  puts("4. Visa tidtabell för en startstation");
   puts("5. Möjliga resavägar från X till Y");
   puts("8. Kör testFunction");
   puts("9. Avsluta");
@@ -94,7 +94,8 @@ void printDeparturesForStation(){
   fflush(stdout);
   scanf("%s", station);
   printOutputText();
-  printDepartures(getNodeByNameElseAddNode(uppsalaNetwork, station));
+  printf("Linje\tTid\n");
+  printDeparturesInClockFormat(getNodeByNameElseAddNode(uppsalaNetwork, station));
 }
 
 void printPathXtoY (){
