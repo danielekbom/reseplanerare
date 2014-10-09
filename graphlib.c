@@ -223,6 +223,32 @@ void printEdgePatterns(Node fromNode, Array2d edgePatterns){
   }
 }
 
+void printDepartures(Node srcNode){
+  int departureTime;
+  int index = 0;
+  int timeFirstPart = 0;
+  int timeSecondPart = 0;
+
+  while(srcNode->departures[index] != NULL){
+    departureTime = srcNode->departures[index]->departureTime;
+    if(departureTime < 1000){
+      timeFirstPart = departureTime;
+      while(timeFirstPart >= 10){
+	timeFirstPart /= 10;
+      }
+    } else {
+      timeFirstPart = departureTime;
+      while(timeFirstPart >= 100){
+	timeFirstPart /= 10;
+      }
+    }
+    timeSecondPart = departureTime;
+    timeSecondPart %= 100;
+    printf("%u\t%d:%d\n", srcNode->departures[index]->busLine, timeFirstPart, timeSecondPart);
+    index++;
+  }
+}
+
 //Function to free mallocated memory by a graph
 void destroyGraph(Graph graphToDestroy){
   assert(graphToDestroy != NULL);

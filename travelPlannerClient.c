@@ -70,7 +70,7 @@ int handleMainMenuInput(){
     break;
   case 4:
     printOutPutText();
-    puts("Ännu inte implementerat");
+    printDepartures(getNodeByNameElseAddNode(uppsalaNetwork, "Rosmarinvagen"));
     break;
   case 5:
     printPathXtoY();
