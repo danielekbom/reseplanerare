@@ -46,7 +46,7 @@ void collectNodesFromFile(Graph nodeGraph){
 }
 
 void collectEdgesFromFile(Graph nodeGraph){
-  FILE* edgesFile = fopen("data/nätverk.txt", "r");
+  FILE* edgesFile = fopen("data/natverk.txt", "r");
   char* line = malloc(128);
   char* token;
   char nodeToExpand[64];
