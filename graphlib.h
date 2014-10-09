@@ -33,13 +33,12 @@ void connectEdgeByNodeName(Graph srcGraph, char* nodeName, Edge edgeToConnect);
 
 char* getNodeNameFromGraph(Graph srcGraph, Ushort nodeIndex);
 Node getNodeByNameElseAddNode(Graph srcGraph, char* nodeName);
-Ushort getDepartureBusLine(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex);
-Ushort getDepartureTime(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex);
 
 void printPossiblePaths(Graph srcGraph, char* fromNodeName, char* toNodeName);
 Array2d getPossiblePaths(Node fromNode, Node toNode);
 void printEdgePatterns(Node fromNode, Array2d  edgePatterns);
 void printDeparturesInClockFormat(Node srcNode);
+char* convertDepartureTimeToString(int departureTime);
 
 void destroyGraph(Graph graphToDestroy);
 

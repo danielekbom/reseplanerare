@@ -8,9 +8,7 @@ struct node{
   char* nodeName;
   int edgesCount;
   Edge edges[20];
-  //listnode *edges;
-  Voidlist depart;
-  Departure departures[512];
+  CustomVoidList departures;
 };
 
 struct departure{
@@ -30,7 +28,7 @@ struct array2d{
 
 //Temporary function used for testing during development
 void testFunction(){
-
+  
 }
 
 //Creates a mew empty graph and returns a pointer to it
@@ -54,9 +52,7 @@ Node createNode(char* nodeName){
   for(int i = 0; i < 20; ++i){
     newNode->edges[i] = NULL;
   }
-  for(int i = 0; i < 512; ++i){
-    newNode->departures[i] = NULL;
-  }
+  newNode->departures = createNewList();
   newNode->nodeName = nodeName;
   return newNode;
 }
@@ -71,11 +67,7 @@ Departure createDeparture(Ushort busLine, Ushort departureTime){
 
 //Connects a departure to a node
 void connectDeparture(Node nodeToExpand, Departure departureToConnect){
-  int index = 0;
-  while(nodeToExpand->departures[index] != NULL){
-    ++index;
-  }
-  nodeToExpand->departures[index] = departureToConnect;
+  addToList(nodeToExpand->departures, departureToConnect);
 }
 
 //Creates a new edge with the data from the parameters and returns a pointer to it
@@ -123,14 +115,6 @@ Node getNodeByNameElseAddNode(Graph srcGraph, char* nodeName){
     return tmpNode;
   }
   return srcGraph->nodes[index];
-}
-
-Ushort getDepartureBusLine(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex){
-  return srcGraph->nodes[nodeIndex]->departures[departureIndex]->busLine;
-}
-
-Ushort getDepartureTime(Graph srcGraph, Ushort nodeIndex, Ushort departureIndex){
-  return srcGraph->nodes[nodeIndex]->departures[departureIndex]->departureTime;
 }
 
 void printPossiblePaths(Graph srcGraph, char* fromNodeName, char* toNodeName){
@@ -226,30 +210,40 @@ void printEdgePatterns(Node fromNode, Array2d edgePatterns){
 }
 
 void printDeparturesInClockFormat(Node srcNode){
-  int departureTime;
-  char departureTimeString[6];
-  char tmpDepartureTimeString[5];
   int index = 0;
-  while(srcNode->departures[index] != NULL){
-    departureTime = srcNode->departures[index]->departureTime;
-    sprintf(tmpDepartureTimeString, "%u", departureTime);
-    if(departureTime < 1000){
-      departureTimeString[0] = tmpDepartureTimeString[0];
-      departureTimeString[1] = ':';
-      departureTimeString[2] = tmpDepartureTimeString[1];
-      departureTimeString[3] = tmpDepartureTimeString[2];
-      departureTimeString[4] = '\0';
-    } else {
-      departureTimeString[0] = tmpDepartureTimeString[0];
-      departureTimeString[1] = tmpDepartureTimeString[1];
-      departureTimeString[2] = ':';
-      departureTimeString[3] = tmpDepartureTimeString[2];
-      departureTimeString[4] = tmpDepartureTimeString[3];
-      departureTimeString[5] = '\0';
-    }
-    printf("%u\t%s\n", srcNode->departures[index]->busLine, departureTimeString);
+  Listnode departureNode = getFirst(srcNode->departures);
+  Departure currentDeparture;
+  char* departureTime;
+
+  while(departureNode != NULL){
+    currentDeparture = getData(departureNode);
+    departureTime = convertDepartureTimeToString(currentDeparture->departureTime);
+    printf("%u\t%s\n", currentDeparture->busLine, departureTime);
+    departureNode = getNext(departureNode);
+    free(departureTime);
     index++;
   }
+}
+
+char* convertDepartureTimeToString(int departureTime){
+  char* departureTimeString = malloc(sizeof(char)*6);
+  char tmpDepartureTimeString[5];
+  sprintf(tmpDepartureTimeString, "%u", departureTime);
+  if(departureTime < 1000){
+    departureTimeString[0] = tmpDepartureTimeString[0];
+    departureTimeString[1] = ':';
+    departureTimeString[2] = tmpDepartureTimeString[1];
+    departureTimeString[3] = tmpDepartureTimeString[2];
+    departureTimeString[4] = '\0';
+  } else {
+    departureTimeString[0] = tmpDepartureTimeString[0];
+    departureTimeString[1] = tmpDepartureTimeString[1];
+    departureTimeString[2] = ':';
+    departureTimeString[3] = tmpDepartureTimeString[2];
+    departureTimeString[4] = tmpDepartureTimeString[3];
+    departureTimeString[5] = '\0';
+  }
+  return departureTimeString;
 }
 
 //Function to free mallocated memory by a graph
@@ -257,20 +251,14 @@ void destroyGraph(Graph graphToDestroy){
   assert(graphToDestroy != NULL);
   int nodeIndex = 0;
   int edgeIndex = 0;
-  int departureIndex = 0;
   while(graphToDestroy->nodes[nodeIndex] != NULL){
     free(graphToDestroy->nodes[nodeIndex]->nodeName);
     while(graphToDestroy->nodes[nodeIndex]->edges[edgeIndex] != NULL){
       free(graphToDestroy->nodes[nodeIndex]->edges[edgeIndex]);
       ++edgeIndex;
     }
-    while(graphToDestroy->nodes[nodeIndex]->departures[departureIndex] != NULL){
-      free(graphToDestroy->nodes[nodeIndex]->departures[departureIndex]);
-      ++departureIndex;
-    }
     free(graphToDestroy->nodes[nodeIndex]);
     edgeIndex = 0;
-    departureIndex = 0;
     ++nodeIndex;
   }
   free(graphToDestroy);

@@ -5,9 +5,15 @@
 #ifndef _CUSTOMVOIDLIST_H
 #define _CUSTOMVOIDLIST_H
 
-typedef struct voidlist voidlist;
-typedef voidlist* Voidlist;
+typedef struct customVoidList customVoidList;
+typedef customVoidList* CustomVoidList;
+typedef struct listnode listnode;
+typedef listnode* Listnode;
 
-void addToList(Voidlist firstNode, void* data);
+CustomVoidList createNewList();
+void addToList(CustomVoidList list, void* data);
+Listnode getFirst(CustomVoidList list);
+Listnode getNext(Listnode srcListNode);
+void* getData(Listnode srcListNode);
 
 #endif
