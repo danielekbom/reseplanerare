@@ -225,26 +225,27 @@ void printEdgePatterns(Node fromNode, Array2d edgePatterns){
 
 void printDepartures(Node srcNode){
   int departureTime;
+  char departureTimeString[6];
+  char tmpDepartureTimeString[5];
   int index = 0;
-  int timeFirstPart = 0;
-  int timeSecondPart = 0;
-
   while(srcNode->departures[index] != NULL){
     departureTime = srcNode->departures[index]->departureTime;
+    sprintf(tmpDepartureTimeString, "%u", departureTime);
     if(departureTime < 1000){
-      timeFirstPart = departureTime;
-      while(timeFirstPart >= 10){
-	timeFirstPart /= 10;
-      }
+      departureTimeString[0] = tmpDepartureTimeString[0];
+      departureTimeString[1] = ':';
+      departureTimeString[2] = tmpDepartureTimeString[1];
+      departureTimeString[3] = tmpDepartureTimeString[2];
+      departureTimeString[4] = '\0';
     } else {
-      timeFirstPart = departureTime;
-      while(timeFirstPart >= 100){
-	timeFirstPart /= 10;
-      }
+      departureTimeString[0] = tmpDepartureTimeString[0];
+      departureTimeString[1] = tmpDepartureTimeString[1];
+      departureTimeString[2] = ':';
+      departureTimeString[3] = tmpDepartureTimeString[2];
+      departureTimeString[4] = tmpDepartureTimeString[3];
+      departureTimeString[5] = '\0';
     }
-    timeSecondPart = departureTime;
-    timeSecondPart %= 100;
-    printf("%u\t%d:%d\n", srcNode->departures[index]->busLine, timeFirstPart, timeSecondPart);
+    printf("%u\t%s\n", srcNode->departures[index]->busLine, departureTimeString);
     index++;
   }
 }

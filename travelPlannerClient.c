@@ -45,7 +45,7 @@ void printMainMenu(){
   puts("Vad vill du göra?");
 }
 
-void printOutPutText(){
+void printOutputText(){
   puts("\n*******************************************");
   puts("***************** Output ******************");
   puts("*******************************************");
@@ -57,36 +57,44 @@ int handleMainMenuInput(){
   scanf("%d", &choice);
   switch(choice){
   case 1:
-    printOutPutText();
+    printOutputText();
     puts("Ännu inte implementerat");
     break;
   case 2:
-    printOutPutText();
+    printOutputText();
     puts("Ännu inte implementerat");
     break;
   case 3:
-    printOutPutText();
+    printOutputText();
     puts("Ännu inte implementerat");
     break;
   case 4:
-    printOutPutText();
-    printDepartures(getNodeByNameElseAddNode(uppsalaNetwork, "Rosmarinvagen"));
+    printDeparturesForStation();
     break;
   case 5:
     printPathXtoY();
     break;
   case 8:
-    printOutPutText();
+    printOutputText();
     testFunction();
     break;
   case 9:
     break;
   default:
-    printOutPutText();
+    printOutputText();
     puts("Menupunkten finns inte, prova igen");
   }
   puts("*******************************************");
   return choice;
+}
+
+void printDeparturesForStation(){
+  char* station = malloc(64);
+  puts("\nAnge en station att visa tidtabell för:");
+  fflush(stdout);
+  scanf("%s", station);
+  printOutputText();
+  printDepartures(getNodeByNameElseAddNode(uppsalaNetwork, station));
 }
 
 void printPathXtoY (){
@@ -98,6 +106,6 @@ void printPathXtoY (){
   puts("\nAnge önskad slutstation:");
   fflush(stdout);
   scanf("%s", Y);
-  printOutPutText();
+  printOutputText();
   printPossiblePaths(uppsalaNetwork, X, Y);
 }

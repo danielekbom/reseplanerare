@@ -9,8 +9,9 @@
 void entryPoint();
 void mainMenu();
 void printMainMenu();
-void printOutPutText();
+void printOutputText();
 int handleMainMenuInput();
 void printPathXtoY();
+void printDeparturesForStation();
 
 #endif
