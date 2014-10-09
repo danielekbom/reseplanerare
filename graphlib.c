@@ -8,6 +8,8 @@ struct node{
   char* nodeName;
   int edgesCount;
   Edge edges[20];
+  //listnode *edges;
+  Voidlist depart;
   Departure departures[512];
 };
 

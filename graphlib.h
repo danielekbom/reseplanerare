@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include "customVoidList.h"
 
 #ifndef _GRAPHLIB_H
 #define _GRAPHLIB_H
