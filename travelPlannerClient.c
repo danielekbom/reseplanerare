@@ -18,9 +18,9 @@ void mainMenu(){
     choice = handleMainMenuInput();
 
     if(choice != 9){
-      puts("\nKlicka på retur för att komma till huvudmenyn");
+      puts("\nKlicka pa retur for att komma till huvudmenyn");
     } else {
-      puts("\nProgrammet avslutas, klicka på retur");
+      puts("\nProgrammet avslutas, klicka pa retur");
     }
 
     fflush(stdout);
@@ -34,15 +34,15 @@ void printMainMenu(){
   puts("-------------------------------------------");
   puts("-------------- Reseplanerare --------------");
   puts("-------------------------------------------");
-  puts("1. Skapa nytt bussnätverk");
-  puts("2. Skapa ny busshållsplats");
-  puts("3. Skapa ny avgång");
-  puts("4. Visa tidtabell för en startstation");
-  puts("5. Möjliga resavägar från X till Y");
-  puts("8. Kör testFunction");
+  puts("1. Skapa nytt bussnatverk");
+  puts("2. Skapa ny busshallsplats");
+  puts("3. Skapa ny avgang");
+  puts("4. Visa tidtabell for en startstation");
+  puts("5. Mojliga resavagar fran X till Y");
+  puts("8. Kor testFunction");
   puts("9. Avsluta");
   puts("-------------------------------------------");
-  puts("Vad vill du göra?");
+  puts("Vad vill du gora?");
 }
 
 void printOutputText(){
@@ -58,15 +58,15 @@ int handleMainMenuInput(){
   switch(choice){
   case 1:
     printOutputText();
-    puts("Ännu inte implementerat");
+    puts("Annu inte implementerat");
     break;
   case 2:
     printOutputText();
-    puts("Ännu inte implementerat");
+    puts("Annu inte implementerat");
     break;
   case 3:
     printOutputText();
-    puts("Ännu inte implementerat");
+    puts("Annu inte implementerat");
     break;
   case 4:
     printDeparturesForStation();
@@ -90,7 +90,7 @@ int handleMainMenuInput(){
 
 void printDeparturesForStation(){
   char* station = malloc(64);
-  puts("\nAnge en station att visa tidtabell för:");
+  puts("\nAnge en station att visa tidtabell for:");
   fflush(stdout);
   scanf("%s", station);
   printOutputText();
@@ -101,10 +101,10 @@ void printDeparturesForStation(){
 void printPathXtoY (){
   char* X = malloc(32);
   char* Y = malloc(32);
-  puts("\nAnge önskad startstation:");
+  puts("\nAnge onskad startstation:");
   fflush(stdout);
   scanf("%s", X);
-  puts("\nAnge önskad slutstation:");
+  puts("\nAnge onskad slutstation:");
   fflush(stdout);
   scanf("%s", Y);
   printOutputText();
