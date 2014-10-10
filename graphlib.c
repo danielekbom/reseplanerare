@@ -1,7 +1,7 @@
 #include "graphlib.h"
 
 struct graph{
-  Node nodes[2048];
+  CustomVoidList nodes;
 };
 
 struct node{
@@ -34,16 +34,13 @@ void testFunction(){
 //Creates a mew empty graph and returns a pointer to it
 Graph createGraph(){
   Graph newGraph = calloc(sizeof(graph), 1);
+  newGraph->nodes = createNewList();
   return newGraph;
 }
 
 //Adds the given node to the given graph
 void addNodeToGraph(Graph targetGraph, Node nodeToAdd){
-  int index = 0;
-  while(targetGraph->nodes[index] != NULL){
-    ++index;
-  }
-  targetGraph->nodes[index] = nodeToAdd;
+  addToList(targetGraph->nodes, nodeToAdd);
 }
 
 //Creates a new empty node with name nodeName and returns a pointer to it
@@ -92,29 +89,23 @@ void connectEdgeByNodeName(Graph srcGraph, char* nodeName, Edge edgeToConnect){
   connectEdge(getNodeByNameElseAddNode(srcGraph, nodeName), edgeToConnect);
 }
 
-char* getNodeNameFromGraph(Graph srcGraph, Ushort nodeIndex){
-  char* nodeName = malloc(sizeof(srcGraph->nodes[nodeIndex]->nodeName));
-  strcpy(nodeName, srcGraph->nodes[nodeIndex]->nodeName);
-  return nodeName;
-}
-
 Node getNodeByNameElseAddNode(Graph srcGraph, char* nodeName){
-  int index = 0;
-  Node tmpNode;
-  if(srcGraph->nodes[0] != NULL){
-    while(strcmp(srcGraph->nodes[index]->nodeName, nodeName)){
-      ++index;
-      if(srcGraph->nodes[index] == NULL){
-	break;
-      }
+  Listnode tmpListnode = getFirst(srcGraph->nodes);
+  char* nodeNameFromGraph;
+  while(tmpListnode != NULL){
+    nodeNameFromGraph = ((Node)getData(tmpListnode))->nodeName;
+    if(!strcmp(nodeNameFromGraph, nodeName)){
+      return (Node)getData(tmpListnode);
     }
+    tmpListnode = getNext(tmpListnode);
   }
-  if(srcGraph->nodes[index] == NULL){
+  Node tmpNode = malloc(sizeof(Node));
+  if(tmpListnode == NULL){
     tmpNode = createNode(nodeName);
     addNodeToGraph(srcGraph, tmpNode);
     return tmpNode;
   }
-  return srcGraph->nodes[index];
+  return NULL;
 }
 
 void printPossiblePaths(Graph srcGraph, char* fromNodeName, char* toNodeName){
@@ -247,7 +238,7 @@ char* convertDepartureTimeToString(int departureTime){
 }
 
 //Function to free mallocated memory by a graph
-void destroyGraph(Graph graphToDestroy){
+/*void destroyGraph(Graph graphToDestroy){
   assert(graphToDestroy != NULL);
   int nodeIndex = 0;
   int edgeIndex = 0;
@@ -263,3 +254,4 @@ void destroyGraph(Graph graphToDestroy){
   }
   free(graphToDestroy);
 }
+*/

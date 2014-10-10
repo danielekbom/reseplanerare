@@ -31,7 +31,6 @@ Edge createEdge(Node endNode, unsigned int time, unsigned short busLine);
 void connectEdge(Node startNode, Edge edgeToConnect);
 void connectEdgeByNodeName(Graph srcGraph, char* nodeName, Edge edgeToConnect);
 
-char* getNodeNameFromGraph(Graph srcGraph, Ushort nodeIndex);
 Node getNodeByNameElseAddNode(Graph srcGraph, char* nodeName);
 
 void printPossiblePaths(Graph srcGraph, char* fromNodeName, char* toNodeName);

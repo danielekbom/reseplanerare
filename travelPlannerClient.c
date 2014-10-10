@@ -8,7 +8,7 @@ void entryPoint(){
   mainMenu();
   testFunction();
 
-  destroyGraph(uppsalaNetwork);
+  //destroyGraph(uppsalaNetwork);
 }
 
 void mainMenu(){
