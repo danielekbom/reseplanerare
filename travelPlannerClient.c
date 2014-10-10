@@ -6,8 +6,7 @@ void entryPoint(){
   uppsalaNetwork = importNetwork();
 
   mainMenu();
-  testFunction();
-
+  //testFunction(uppsalaNetwork);
   destroyGraph(uppsalaNetwork);
 }
 
@@ -76,7 +75,7 @@ int handleMainMenuInput(){
     break;
   case 8:
     printOutputText();
-    testFunction();
+    testFunction(uppsalaNetwork);
     break;
   case 9:
     break;

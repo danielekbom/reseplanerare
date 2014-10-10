@@ -27,8 +27,21 @@ struct array2d{
 };
 
 //Temporary function used for testing during development
-void testFunction(){
-  
+void testFunction(Graph testGraph){
+  Graph testGraphh = createGraph();
+
+  Node testNode = createNode("hej");
+  addNodeToGraph(testGraphh, testNode);
+
+  Node testNode2 = createNode("hejj");
+  addNodeToGraph(testGraphh, testNode2);
+
+  int i = getNodeIndex(testGraphh, testNode);
+  printf("%d\n", i);
+  removeNode(testGraphh, testNode);
+
+  i = getNodeIndex(testGraphh, testNode);
+  printf("%d\n", i);
 }
 
 //Creates a mew empty graph and returns a pointer to it
@@ -87,6 +100,21 @@ void connectEdge(Node startNode, Edge edgeToConnect){
 
 void connectEdgeByNodeName(Graph srcGraph, char* nodeName, Edge edgeToConnect){
   connectEdge(getNodeByNameElseAddNode(srcGraph, nodeName), edgeToConnect);
+}
+
+int getNodeIndex(Graph srcGraph, Node nodeToFind){
+  int index = 0;
+  Listnode first = getFirst(srcGraph->nodes);
+  Node tmpNode;
+  while(first != NULL){
+    tmpNode = getData(first);
+    if(!strcmp(tmpNode->nodeName, nodeToFind->nodeName)){
+      return index;
+    }
+    first = getNext(first);
+    index++;
+  }
+  return -1;
 }
 
 Node getNodeByNameElseAddNode(Graph srcGraph, char* nodeName){
@@ -236,6 +264,11 @@ char* convertDepartureTimeToString(int departureTime){
     departureTimeString[5] = '\0';
   }
   return departureTimeString;
+}
+
+void removeNode(Graph srcGraph, Node nodeToRemove){
+  int nodeIndex = getNodeIndex(srcGraph, nodeToRemove);
+  removeNodeAtIndex(srcGraph->nodes, nodeIndex);
 }
 
 //Function to free mallocated memory by a graph

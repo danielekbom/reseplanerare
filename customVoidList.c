@@ -47,6 +47,17 @@ void* getData(Listnode srcListNode){
   return srcListNode->data;
 }
 
+void removeNodeAtIndex(CustomVoidList list, int nodeIndex){
+  Listnode listNode = list->firstNode;
+  for(int i = 0; i < nodeIndex; i++){
+    listNode = listNode->next;
+  }
+  Listnode prevNode = listNode - 1;
+  Listnode nextNode = listNode + 1;
+  prevNode->next = nextNode;
+  free(listNode);
+}
+
 void destroyList(CustomVoidList list){
   Listnode tmpListnode = list->firstNode;
   Listnode tmptmpListnode;

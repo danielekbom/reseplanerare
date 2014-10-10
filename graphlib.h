@@ -21,7 +21,7 @@ typedef departure* Departure;
 typedef edge* Edge;
 typedef array2d* Array2d;
 
-void testFunction();
+void testFunction(Graph testGraph);
 Graph createGraph();
 void addNodeToGraph(Graph targetGraph, Node nodeToAdd);
 Node createNode(char* nodeName);
@@ -31,6 +31,7 @@ Edge createEdge(Node endNode, unsigned int time, unsigned short busLine);
 void connectEdge(Node startNode, Edge edgeToConnect);
 void connectEdgeByNodeName(Graph srcGraph, char* nodeName, Edge edgeToConnect);
 
+int getNodeIndex(Graph srcGraph, Node nodeToFind);
 Node getNodeByNameElseAddNode(Graph srcGraph, char* nodeName);
 
 void printPossiblePaths(Graph srcGraph, char* fromNodeName, char* toNodeName);
@@ -39,6 +40,7 @@ void printEdgePatterns(Node fromNode, Array2d  edgePatterns);
 void printDeparturesInClockFormat(Node srcNode);
 char* convertDepartureTimeToString(int departureTime);
 
+void removeNode(Graph srcGraph, Node nodeToRemove);
 void destroyGraph(Graph graphToDestroy);
 
 #endif

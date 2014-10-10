@@ -15,6 +15,7 @@ void addToList(CustomVoidList list, void* data);
 Listnode getFirst(CustomVoidList list);
 Listnode getNext(Listnode srcListNode);
 void* getData(Listnode srcListNode);
+void removeNodeAtIndex(CustomVoidList list, int nodeIndex);
 void destroyList(CustomVoidList list);
 
 #endif
