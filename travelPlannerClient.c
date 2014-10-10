@@ -96,6 +96,7 @@ void printDeparturesForStation(){
   printOutputText();
   printf("Linje\tTid\n");
   printDeparturesInClockFormat(getNodeByNameElseAddNode(uppsalaNetwork, station));
+  free(station);
 }
 
 void printPathXtoY (){
@@ -109,4 +110,6 @@ void printPathXtoY (){
   scanf("%s", Y);
   printOutputText();
   printPossiblePaths(uppsalaNetwork, X, Y);
+  free(X);
+  free(Y);
 }

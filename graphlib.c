@@ -92,6 +92,7 @@ void connectEdgeByNodeName(Graph srcGraph, char* nodeName, Edge edgeToConnect){
 Node getNodeByNameElseAddNode(Graph srcGraph, char* nodeName){
   Listnode tmpListnode = getFirst(srcGraph->nodes);
   char* nodeNameFromGraph;
+  Node tmpNode;
   while(tmpListnode != NULL){
     nodeNameFromGraph = ((Node)getData(tmpListnode))->nodeName;
     if(!strcmp(nodeNameFromGraph, nodeName)){
@@ -99,7 +100,6 @@ Node getNodeByNameElseAddNode(Graph srcGraph, char* nodeName){
     }
     tmpListnode = getNext(tmpListnode);
   }
-  Node tmpNode = malloc(sizeof(Node));
   if(tmpListnode == NULL){
     tmpNode = createNode(nodeName);
     addNodeToGraph(srcGraph, tmpNode);
@@ -113,6 +113,7 @@ void printPossiblePaths(Graph srcGraph, char* fromNodeName, char* toNodeName){
   Node toNode = getNodeByNameElseAddNode(srcGraph, toNodeName);
   Array2d edgePatterns = getPossiblePaths(fromNode, toNode);
   printEdgePatterns(fromNode, edgePatterns);
+  free(edgePatterns);
 }
 
 Array2d getPossiblePaths(Node fromNode, Node toNode){
@@ -252,7 +253,6 @@ void destroyGraph(Graph graphToDestroy){
     edgeIndex = 0;
     destroyList(tmpNode->departures);
     free(tmpNode->nodeName);
-    free(tmpNode);
     tmpListnode = getNext(tmpListnode);
   }
   destroyList(graphToDestroy->nodes);

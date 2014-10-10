@@ -54,6 +54,7 @@ void destroyList(CustomVoidList list){
   while(tmpListnode != NULL){
     tmptmpListnode = tmpListnode;
     tmpListnode = tmpListnode->next;
+    free(tmptmpListnode->data);
     free(tmptmpListnode);
   }
   free(list);
