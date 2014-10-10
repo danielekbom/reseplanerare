@@ -269,6 +269,16 @@ char* convertDepartureTimeToString(int departureTime){
 void removeNode(Graph srcGraph, Node nodeToRemove){
   int nodeIndex = getNodeIndex(srcGraph, nodeToRemove);
   removeNodeAtIndex(srcGraph->nodes, nodeIndex);
+  
+  /* Listnode listNode = getFirst(srcGraph->nodes);
+  while(getData(listNode) != nodeToRemove){
+    listNode = getNext(listNode);
+  }
+  Listnode prevNode = listNode - 1;
+  Listnode nextNode = listNode + 1;
+  Listnode tmpNode = getNext(prevNode);
+  tmpNode = nextNode;
+  free(listNode);*/
 }
 
 //Function to free mallocated memory by a graph
