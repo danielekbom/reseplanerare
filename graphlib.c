@@ -33,7 +33,7 @@ void testFunction(){
 
 //Creates a mew empty graph and returns a pointer to it
 Graph createGraph(){
-  Graph newGraph = calloc(sizeof(graph), 1);
+  Graph newGraph = calloc(sizeof(Graph), 1);
   newGraph->nodes = createNewList();
   return newGraph;
 }
@@ -238,20 +238,23 @@ char* convertDepartureTimeToString(int departureTime){
 }
 
 //Function to free mallocated memory by a graph
-/*void destroyGraph(Graph graphToDestroy){
+void destroyGraph(Graph graphToDestroy){
   assert(graphToDestroy != NULL);
-  int nodeIndex = 0;
+  Listnode tmpListnode = getFirst(graphToDestroy->nodes);
+  Node tmpNode;
   int edgeIndex = 0;
-  while(graphToDestroy->nodes[nodeIndex] != NULL){
-    free(graphToDestroy->nodes[nodeIndex]->nodeName);
-    while(graphToDestroy->nodes[nodeIndex]->edges[edgeIndex] != NULL){
-      free(graphToDestroy->nodes[nodeIndex]->edges[edgeIndex]);
-      ++edgeIndex;
+  while(tmpListnode != NULL){
+    tmpNode = getData(tmpListnode);
+    while(tmpNode->edges[edgeIndex] != NULL && edgeIndex < 20){
+      free(tmpNode->edges[edgeIndex]);
+      edgeIndex++;
     }
-    free(graphToDestroy->nodes[nodeIndex]);
     edgeIndex = 0;
-    ++nodeIndex;
+    destroyList(tmpNode->departures);
+    free(tmpNode->nodeName);
+    free(tmpNode);
+    tmpListnode = getNext(tmpListnode);
   }
+  destroyList(graphToDestroy->nodes);
   free(graphToDestroy);
 }
-*/
