@@ -144,6 +144,14 @@ void printPossiblePaths(Graph srcGraph, char* fromNodeName, char* toNodeName){
   free(edgePatterns);
 }
 
+void printFastestPath(Graph srcGraph, char* fromNodeName, char* toNodeName){
+  Node fromNode = getNodeByNameElseAddNode(srcGraph, fromNodeName);
+  Node toNode = getNodeByNameElseAddNode(srcGraph, toNodeName);
+  Array2d edgePatterns = getPossiblePaths(fromNode, toNode);
+  printFastestEdgePattern(fromNode, edgePatterns);
+  free(edgePatterns);
+}
+
 Array2d getPossiblePaths(Node fromNode, Node toNode){
   Array2d edgePatterns = malloc(sizeof(array2d));
   memset(edgePatterns->array, -1, sizeof(array2d));
@@ -227,6 +235,48 @@ void printEdgePatterns(Node fromNode, Array2d edgePatterns){
     }
     index++;
   }
+}
+
+void printFastestEdgePattern(Node fromNode, Array2d edgePatterns){
+  Node tmpNode = fromNode;
+  int index = 0;
+  int innerIndex = 0;
+  Ushort time = 0;
+  Ushort totalTravelTime = 0;
+  Ushort previusTotalTime = 2000;
+  Ushort fastestIndex = 0;
+  while(index < 16){
+    if(edgePatterns->array[index][0] != -1){
+      while(edgePatterns->array[index][innerIndex] != -1){
+	if(tmpNode->edges[edgePatterns->array[index][innerIndex]] != NULL){
+	  time = tmpNode->edges[edgePatterns->array[index][innerIndex]]->travelTime;
+	  tmpNode = tmpNode->edges[edgePatterns->array[index][innerIndex]]->endNode;
+	  totalTravelTime += time;
+	}
+	innerIndex++;
+      }
+      if(previusTotalTime > totalTravelTime){
+	fastestIndex = index;
+      }
+      innerIndex = 0;
+      totalTravelTime = 0;
+      tmpNode = fromNode;
+    }
+    index++;
+  }
+  innerIndex = 0;
+  printf("Snabbaste resvägen är med linje %u:\n", fromNode->edges[fastestIndex]->busLine);
+  printf("%s", tmpNode->nodeName);
+  while(edgePatterns->array[fastestIndex][innerIndex] != -1){
+    if(tmpNode->edges[edgePatterns->array[fastestIndex][innerIndex]] != NULL){
+      time = tmpNode->edges[edgePatterns->array[fastestIndex][innerIndex]]->travelTime;
+      tmpNode = tmpNode->edges[edgePatterns->array[fastestIndex][innerIndex]]->endNode;
+      printf(" -> Restid: %u min -> %s", time, tmpNode->nodeName);
+      totalTravelTime += time;
+    }
+    innerIndex++;
+  }
+  printf("\nTotal restid: %u min\n", totalTravelTime); 
 }
 
 void printDeparturesInClockFormat(Node srcNode){

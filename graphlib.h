@@ -35,8 +35,10 @@ int getNodeIndex(Graph srcGraph, Node nodeToFind);
 Node getNodeByNameElseAddNode(Graph srcGraph, char* nodeName);
 
 void printPossiblePaths(Graph srcGraph, char* fromNodeName, char* toNodeName);
+void printFastestPath(Graph srcGraph, char* fromNodeName, char* toNodeName);
 Array2d getPossiblePaths(Node fromNode, Node toNode);
 void printEdgePatterns(Node fromNode, Array2d  edgePatterns);
+void printFastestEdgePattern(Node fromNode, Array2d edgePatterns);
 void printDeparturesInClockFormat(Node srcNode);
 char* convertDepartureTimeToString(int departureTime);
 

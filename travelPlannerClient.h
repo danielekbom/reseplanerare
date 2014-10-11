@@ -11,7 +11,7 @@ void mainMenu();
 void printMainMenu();
 void printOutputText();
 int handleMainMenuInput();
-void printPathXtoY();
+void printPathXtoY(int fastestOrNot);
 void printDeparturesForStation();
 
 #endif

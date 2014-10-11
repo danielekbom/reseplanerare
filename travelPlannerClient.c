@@ -38,6 +38,7 @@ void printMainMenu(){
   puts("3. Skapa ny avgang");
   puts("4. Visa tidtabell for en startstation");
   puts("5. Mojliga resavagar fran X till Y");
+  puts("6. Snabbast resavag fran X till Y");
   puts("8. Kor testFunction");
   puts("9. Avsluta");
   puts("-------------------------------------------");
@@ -71,7 +72,10 @@ int handleMainMenuInput(){
     printDeparturesForStation();
     break;
   case 5:
-    printPathXtoY();
+    printPathXtoY(0);
+    break;
+  case 6:
+    printPathXtoY(1);
     break;
   case 8:
     printOutputText();
@@ -98,7 +102,7 @@ void printDeparturesForStation(){
   free(station);
 }
 
-void printPathXtoY (){
+void printPathXtoY(int fastestOrNot){
   char* X = malloc(32);
   char* Y = malloc(32);
   puts("\nAnge onskad startstation:");
@@ -108,7 +112,12 @@ void printPathXtoY (){
   fflush(stdout);
   scanf("%s", Y);
   printOutputText();
-  printPossiblePaths(uppsalaNetwork, X, Y);
+  if(fastestOrNot == 0){
+    printPossiblePaths(uppsalaNetwork, X, Y);
+  } else {
+    printFastestPath(uppsalaNetwork, X, Y);
+  }
   free(X);
   free(Y);
 }
+
