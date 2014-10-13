@@ -6,7 +6,7 @@
 #define _CUSTOMVOIDLIST_H
 
 //customVoidList is a linked list where generic data can be stored.
-//struct customVoidList is the list itself, which contains strucs listnodes which represents the nodes.
+//struct customVoidList is the list itself, which contains struct listnodes which represents the nodes.
 
 //A type named customVoidList is defined as a struct customVoidList.
 typedef struct customVoidList customVoidList;
