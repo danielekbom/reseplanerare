@@ -28,20 +28,7 @@ struct array2d{
 
 //Temporary function used for testing during development
 void testFunction(Graph testGraph){
-  Graph testGraphh = createGraph();
 
-  Node testNode = createNode("hej");
-  addNodeToGraph(testGraphh, testNode);
-
-  Node testNode2 = createNode("hejj");
-  addNodeToGraph(testGraphh, testNode2);
-
-  int i = getNodeIndex(testGraphh, testNode2);
-  printf("%d\n", i);
-  removeNode(testGraphh, testNode);
-
-  i = getNodeIndex(testGraphh, testNode2);
-  printf("%d\n", i);
 }
 
 //Creates a mew empty graph and returns a pointer to it
@@ -319,16 +306,24 @@ char* convertDepartureTimeToString(int departureTime){
 void removeNode(Graph srcGraph, Node nodeToRemove){
   int nodeIndex = getNodeIndex(srcGraph, nodeToRemove);
   removeNodeAtIndex(srcGraph->nodes, nodeIndex);
-  
-  /* Listnode listNode = getFirst(srcGraph->nodes);
-  while(getData(listNode) != nodeToRemove){
-    listNode = getNext(listNode);
+}
+
+void removeEdge(Node srcNode, Ushort edgeLabel){
+  int index = 0;
+  while(srcNode->edges[index] != NULL && srcNode->edges[index]->busLine != edgeLabel){
+    index++;
   }
-  Listnode prevNode = listNode - 1;
-  Listnode nextNode = listNode + 1;
-  Listnode tmpNode = getNext(prevNode);
-  tmpNode = nextNode;
-  free(listNode);*/
+  if(srcNode->edges[index] == NULL){
+    puts("Edge hittades inte");
+    return;
+  }
+  free(srcNode->edges[index]);
+  while(srcNode->edges[index+1] != NULL){
+    srcNode->edges[index] = srcNode->edges[index+1];
+    index++;
+  }
+  srcNode->edges[index] = NULL;
+  printf("Edge %u was removed\n", edgeLabel);
 }
 
 //Function to free mallocated memory by a graph

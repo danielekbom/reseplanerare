@@ -33,12 +33,9 @@ void printMainMenu(){
   puts("-------------------------------------------");
   puts("-------------- Reseplanerare --------------");
   puts("-------------------------------------------");
-  puts("1. Skapa nytt bussnatverk");
-  puts("2. Skapa ny busshallsplats");
-  puts("3. Skapa ny avgang");
-  puts("4. Visa tidtabell for en startstation");
-  puts("5. Mojliga resavagar fran X till Y");
-  puts("6. Snabbast resavag fran X till Y");
+  puts("1. Visa tidtabell for en startstation");
+  puts("2. Mojliga resavagar fran X till Y");
+  puts("3. Snabbast resavag fran X till Y");
   puts("8. Kor testFunction");
   puts("9. Avsluta");
   puts("-------------------------------------------");
@@ -57,24 +54,12 @@ int handleMainMenuInput(){
   scanf("%d", &choice);
   switch(choice){
   case 1:
-    printOutputText();
-    puts("Annu inte implementerat");
-    break;
-  case 2:
-    printOutputText();
-    puts("Annu inte implementerat");
-    break;
-  case 3:
-    printOutputText();
-    puts("Annu inte implementerat");
-    break;
-  case 4:
     printDeparturesForStation();
     break;
-  case 5:
+  case 2:
     printPathXtoY(0);
     break;
-  case 6:
+  case 3:
     printPathXtoY(1);
     break;
   case 8:

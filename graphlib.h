@@ -13,32 +13,20 @@
 //and a timestamp. The departures can be used for example in a bus network to specify times when edges
 //(bus lines) departure.
 
-//A type named Uint is defined as an unsigned int.
 typedef unsigned int Uint;
-//A type Ushort is defined as an unsigned short.
 typedef unsigned short Ushort;
-
 typedef struct graph graph;
-
 typedef struct node node;
-
 typedef struct departure departure;
-
 typedef struct edge edge;
-
 typedef struct array2d array2d;
-
 typedef graph* Graph;
-
 typedef node* Node;
-
 typedef departure* Departure;
-
 typedef edge* Edge;
-
 typedef array2d* Array2d;
 
-//testFunction used in development purposes, will be deleted soon
+//testFunction used in development purposes, will be deleted soon.
 void testFunction(Graph testGraph);
 //Creates a new graph on the heap and returns a pointer to it.
 Graph createGraph();
@@ -80,6 +68,8 @@ char* convertDepartureTimeToString(int departureTime);
 
 //Removes the node "nodeToRemove" from the graph "srcGraph".
 void removeNode(Graph srcGraph, Node nodeToRemove);
+//Removes the edge with edge label "edgeLabel" from node "srcNode".
+void removeEdge(Node srcNode, Ushort edgeLabel);
 //Frees all the memory allocated by the graph "graphToDestroy" and all of its nodes.
 void destroyGraph(Graph graphToDestroy);
 
