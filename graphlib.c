@@ -36,11 +36,11 @@ void testFunction(Graph testGraph){
   Node testNode2 = createNode("hejj");
   addNodeToGraph(testGraphh, testNode2);
 
-  int i = getNodeIndex(testGraphh, testNode);
+  int i = getNodeIndex(testGraphh, testNode2);
   printf("%d\n", i);
   removeNode(testGraphh, testNode);
 
-  i = getNodeIndex(testGraphh, testNode);
+  i = getNodeIndex(testGraphh, testNode2);
   printf("%d\n", i);
 }
 

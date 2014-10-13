@@ -48,14 +48,24 @@ void* getData(Listnode srcListNode){
 }
 
 void removeNodeAtIndex(CustomVoidList list, int nodeIndex){
-  Listnode listNode = list->firstNode;
-  for(int i = 0; i < nodeIndex; i++){
-    listNode = listNode->next;
+  Listnode prev = list->firstNode;
+
+  if(nodeIndex == 0){
+    Listnode ToRemove = list->firstNode;
+    list->firstNode = list->firstNode->next;
+    free(ToRemove);
+    return;
   }
-  Listnode prevNode = listNode - 1;
-  Listnode nextNode = listNode + 1;
-  prevNode->next = nextNode;
-  free(listNode);
+
+  for(int i = 0; i < nodeIndex-1; i++){
+    prev = prev->next;
+  }
+
+  Listnode next = prev->next->next;
+  Listnode toRemove = prev->next;
+
+  prev->next = next;
+  free(toRemove);
 }
 
 void destroyList(CustomVoidList list){
