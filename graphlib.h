@@ -18,25 +18,24 @@ typedef unsigned int Uint;
 //A type Ushort is defined as an unsigned short.
 typedef unsigned short Ushort;
 
-//A type named graph is defined as an struct graph.
 typedef struct graph graph;
-//A type named node is defined as an struct node.
+
 typedef struct node node;
-//A type named departure is defined as an struct departure.
+
 typedef struct departure departure;
-//A type named edge is defined as an struct edge.
+
 typedef struct edge edge;
-//A type named array2d is defined as an struct array2d.
+
 typedef struct array2d array2d;
-//A type named Graph is defined as an pointer to graph.
+
 typedef graph* Graph;
-//A type named Node is defined as an pointer to node.
+
 typedef node* Node;
-//A type named Departure is defined as an pointer to departure.
+
 typedef departure* Departure;
-//A type named Edge is defined as an pointer to edge.
+
 typedef edge* Edge;
-//A type named Array2d is defined as an pointer to array2d.
+
 typedef array2d* Array2d;
 
 //testFunction used in development purposes, will be deleted soon
